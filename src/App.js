@@ -9,6 +9,7 @@ import './App.css'
 function App() {
   return (
     <div className="App">
+      <Example />
       <Routes>
         <Route path="/auth" element={<AuthIndex />}/>
         <Route path="/admin/*" element={<Admin/>}>
