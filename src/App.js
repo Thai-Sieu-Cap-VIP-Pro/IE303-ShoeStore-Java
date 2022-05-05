@@ -1,14 +1,23 @@
 import { Outlet, Route, Routes } from "react-router-dom";
-import Auth from "./features/admin/auth";
-import AuthReducer from "./features/customer/auth/AuthSlice";
-import Example from "./shareComponent/formikCustom/example";
-
+import AuthIndex from "./features/auth/AuthIndex";
+import Admin from "./features/admin/pages/Admin";
+import ProductManager from "./features/admin/pages/ProductManager";
+import BrandManager from "./features/admin/pages/BrandManager";
+import OrderManager from "./features/admin/pages/OrderManager";
+import Report from "./features/admin/pages/Report";
+import "./App.css";
 function App() {
   return (
     <div className="App">
       <Example />
       <Routes>
-        <Route path="/admin/*" element={<Auth />} />
+        <Route path="/auth" element={<AuthIndex />} />
+        <Route path="/admin/*" element={<Admin />}>
+          <Route path="product" element={<ProductManager />} />
+          <Route path="brand" element={<BrandManager />} />
+          <Route path="order" element={<OrderManager />} />
+          <Route path="report" element={<Report />} />
+        </Route>
       </Routes>
     </div>
   );
