@@ -1,8 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import AuthReducer from "../features/customer/auth/AuthSlice";
+import { getDefaultMiddleware } from "@reduxjs/toolkit";
+import BrandReducer from "../features/admin/brandManagement/brandSlice";
 
 export const store = configureStore({
   reducer: {
-    auth: AuthReducer,
+    brand: BrandReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
