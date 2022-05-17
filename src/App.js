@@ -1,19 +1,20 @@
-import { Outlet, Route, Routes } from "react-router-dom";
-import AuthIndex from "./features/auth/AuthIndex";
+import { Route, Routes } from "react-router-dom";
+import AuthIndex from "./features/customer/auth/AuthIndex";
 import Admin from "./features/admin/pages/Admin";
-import ProductManager from "./features/admin/pages/ProductManager";
 import BrandManager from "./features/admin/pages/BrandManager";
 import OrderManager from "./features/admin/pages/OrderManager";
 import Report from "./features/admin/pages/Report";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
+import ProductIndex from "./features/admin/ProductManagement/ProductIndex";
 function App() {
   return (
     <div className="App">
-      <Example />
+      {/* <Example /> */}
       <Routes>
         <Route path="/auth" element={<AuthIndex />}/>
         <Route path="/admin/*" element={<Admin/>}>
-          <Route path="product" element={<ProductManager/>} />
+          <Route path="product" element={<ProductIndex/>} />
           <Route path="brand" element={<BrandManager/>} />
           <Route path="order" element={<OrderManager/>} />
           <Route path="report" element={<Report/>} />
@@ -22,5 +23,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
