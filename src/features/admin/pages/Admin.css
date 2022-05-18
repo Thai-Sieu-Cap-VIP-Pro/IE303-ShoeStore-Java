@@ -1,22 +1,20 @@
-.admin {
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
+.navigate.col-md-2 {
+  padding: 0;
+}
+
+.navigate.col-md-10 {
+  padding: 0;
 }
 .admin__navigation {
-    background-color: #1E293B;
-    padding: 15px 15px;
-    color: #D5E8F0;
-    display: flex;
-    flex-direction: column;
+  background-color: #1e293b;
+  padding: 15px 15px;
+  color: #d5e8f0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 .admin__navigation > span {
-    padding: 12px 12px;
-    font: 14px sans-serif;
-    font-weight: 550;
+  padding: 12px 12px;
+  font: 14px sans-serif;
+  font-weight: 550;
 }
-.Outlet {
-    flex-grow: 1;
-}
-
-

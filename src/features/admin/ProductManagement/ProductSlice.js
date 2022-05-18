@@ -18,17 +18,32 @@ export const fetchDeleteProduct = createAsyncThunk(
   export const fetchAddProduct = createAsyncThunk(
     'products/fetchAddProduct',
     async (product) => {
-        await axios.add(`${API_URL}/products`, product)
+        await axios.post(`${API_URL}/products`, product)
         return product
     }
   )
+export const fetchUpdateProduct = createAsyncThunk(
+  'products/fetchUpdateProduct',
+  async (product) => {
+    console.log(product)
+    await axios.put(`${API_URL}/products/${product.product_id}`, product)
+  }
+)
 const productsSlice = createSlice({
   name: "products",
   initialState: {
+      isShow: false,
       loading: null,
       data: []
   },
-  reducers:{},
+  reducers:{
+    showAddProductForm: (state, action) => {
+      state.isShow = true;
+    },
+    hideAddProductForm: (state, action) => {
+      state.isShow = false;
+    }
+  },
   extraReducers: {
       [fetchProductsData.pending](state) {
           state.loading = HTTP_STATUS.PENDING
@@ -56,7 +71,27 @@ const productsSlice = createSlice({
       [fetchDeleteProduct.rejected](state) {
         state.loading = HTTP_STATUS.REJECTED
       },
+      [fetchAddProduct.pending](state) {
+        state.loading = HTTP_STATUS.PENDING
+      },
+      [fetchAddProduct.fulfilled](state) {
+          state.loading = HTTP_STATUS.FULFILLED
+      },
+      [fetchAddProduct.rejected](state) {
+          state.loading = HTTP_STATUS.REJECTED
+      },
+      [fetchUpdateProduct.pending](state) {
+        state.loading = HTTP_STATUS.PENDING
+      },
+      [fetchUpdateProduct.fulfilled](state) {
+          state.loading = HTTP_STATUS.FULFILLED
+      },
+      [fetchUpdateProduct.rejected](state) {
+          state.loading = HTTP_STATUS.REJECTED
+      },
   }
 })
 export const selectProducts = (state) => state.products.data;
 export default productsSlice.reducer
+const {actions}= productsSlice
+export const {showAddProductForm, hideAddProductForm} = actions;
