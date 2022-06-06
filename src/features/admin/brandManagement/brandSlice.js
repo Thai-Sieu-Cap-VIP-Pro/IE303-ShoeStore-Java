@@ -33,7 +33,6 @@ const BrandSlice = createSlice({
 
     [getAllBrands.rejected]: (state, action) => {},
     [getAllBrands.fulfilled]: (state, action) => {
-      console.log("Lấy nhãn hiệu thành công");
       state.listBrands = action.payload.data;
     },
     [deleteBrand.pending]: (state, action) => {},
