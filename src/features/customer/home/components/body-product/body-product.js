@@ -3,14 +3,20 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectProducts } from "../../../../admin/ProductManagement/ProductSlice";
+import { useDispatch } from "react-redux";
+
+import { getDetailproduct } from "../../HomeSlice";
 
 const BodyProduct = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const products = useSelector(selectProducts);
 
   console.log(products);
-  const handleShowDetail = () => {
+  const handleShowDetail = (id) => {
+    const product = products.find((item) => item.product_id === id);
+    dispatch(getDetailproduct(product));
     navigate("/detail");
   };
   return (
@@ -25,7 +31,10 @@ const BodyProduct = () => {
                 <Card.Body>
                   <Card.Title>{item.product_name}</Card.Title>
                   <Card.Text>{item.product_price}</Card.Text>
-                  <Button variant="primary" onClick={() => handleShowDetail()}>
+                  <Button
+                    variant="primary"
+                    onClick={() => handleShowDetail(item.product_id)}
+                  >
                     View Detail
                   </Button>
                 </Card.Body>
