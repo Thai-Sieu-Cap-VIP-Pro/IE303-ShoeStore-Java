@@ -7,7 +7,7 @@ class AuthAPI {
     return axiosClient.post(url, params);
   };
 
-  logout = () => {
+  logout = (params) => {
     localStorage.removeItem("authTokens");
     const url = "api/auth/lout";
     return axios.get(url, params);
