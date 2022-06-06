@@ -56,7 +56,7 @@
 }
 
 .nav__header__ul>li:hover{
-    background-color: rgba(51, 255, 0, 0.884);
+    box-shadow: 0 3px red;
 }
 
 

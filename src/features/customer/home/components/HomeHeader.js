@@ -1,7 +1,8 @@
 import React from 'react'
-import Login from '../../login_register/login';
-import Register from "../../login_register/register";
+// import Login from '../../login_register/login';
+// import Register from "../../login_register/register";
 import bootstrap from 'bootstrap'
+import "./HomeHeader.css";
 import {Link} from 'react-router-dom'
 
 const HomeHeader = () => {
@@ -13,7 +14,7 @@ const HomeHeader = () => {
                         <div className="header-main-show-logo">
                             <div className="header__left">
                                 <Link to="/login" className="dangnhap">Đăng Nhập</Link>
-                                <>/</>
+                                
                                 <Link to="/register" className="dangky">Đăng Ký</Link>
                             </div>
                             <div className="header__center">
