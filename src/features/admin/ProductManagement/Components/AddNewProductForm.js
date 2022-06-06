@@ -49,11 +49,15 @@ function AddNewProductForm({ isSua, productId }) {
   listBrands.forEach((brand) => {
     brandOptions.push({ key: brand.category_id, value: brand.category_name });
   });
+  const statusOptions = [
+    { key: "1", value: "Hiện" },
+    { key: "0", value: "Ẩn" },
+  ];
   const handleClose = () => {
     dispatch(hideAddProductForm());
   };
-  const [image, setImage] = React.useState(null);
   const dispatch = useDispatch();
+  const [image, setImage] = React.useState(null);
   const handleImageChange = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
@@ -62,7 +66,7 @@ function AddNewProductForm({ isSua, productId }) {
   const onSubmit = async (values) => {
     handleClose();
     if (image !== null) {
-      const imageRef = ref(storage, "image");
+      const imageRef = ref(storage, "image" + pr.product_id);
       uploadBytes(imageRef, image)
         .then(() => {
           getDownloadURL(imageRef)
@@ -81,12 +85,11 @@ function AddNewProductForm({ isSua, productId }) {
         });
     } else {
       values["product_img"] = pr.product_img;
-      if(isSua) {
+      if (isSua) {
         values["product_id"] = pr.product_id;
-       await dispatch(fetchUpdateProduct(values)).unwrap()
-        dispatch(fetchProductsData())
-      }
-      else {
+        await dispatch(fetchUpdateProduct(values)).unwrap();
+        dispatch(fetchProductsData());
+      } else {
         dispatch(fetchAddProduct(values));
       }
     }
@@ -95,7 +98,11 @@ function AddNewProductForm({ isSua, productId }) {
     <div>
       <Modal show={isShow} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Thêm sản phẩm</Modal.Title>
+          {isSua ? (
+            <Modal.Title>Sửa sản phẩm</Modal.Title>
+          ) : (
+            <Modal.Title>Thêm sản phẩm</Modal.Title>
+          )}
         </Modal.Header>
         <Modal.Body>
           <Formik
@@ -136,18 +143,28 @@ function AddNewProductForm({ isSua, productId }) {
                     name="product_quanity"
                   />
                   <FormikControl
-                    control="input"
-                    type="text"
+                    control="select"
+                    options={statusOptions}
                     label="Trạng thái"
                     name="product_status"
                   />
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    disabled={!formik.isValid}
-                  >
-                    Thêm
-                  </Button>
+                  {isSua ? (
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      disabled={!formik.isValid}
+                    >
+                      Sửa
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      disabled={!formik.isValid}
+                    >
+                      Thêm
+                    </Button>
+                  )}
                 </Form>
               );
             }}
