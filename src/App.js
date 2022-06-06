@@ -13,6 +13,11 @@ function App() {
 
           <Route path="brand/*" element={<BrandIndex />} />
         </Route>
+        <Route path="/home/*" element={<HomeIndex />} />
+        <Route path="/detail/*" element={<DetailIndex />} />
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );
