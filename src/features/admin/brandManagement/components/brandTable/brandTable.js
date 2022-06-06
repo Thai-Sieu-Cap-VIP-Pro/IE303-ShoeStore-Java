@@ -8,12 +8,12 @@ import * as Yup from "yup";
 
 const initialValues = {
   name: "",
-  stauts: "",
+  status: "",
 };
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Bạn cần phải nhập trường này !"),
-  stauts: Yup.string().required("Bạn cần phải nhập trường này !"),
+  status: Yup.string().required("Bạn cần phải nhập trường này !"),
 });
 
 const BrandTable = () => {
@@ -36,8 +36,6 @@ const BrandTable = () => {
       await dispatch(action);
       const action1 = getAllBrands();
       await dispatch(action1);
-    } else {
-      console.log("Không xóa");
     }
   };
 
@@ -47,7 +45,6 @@ const BrandTable = () => {
   }, []);
 
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -86,7 +83,7 @@ const BrandTable = () => {
                   <Button
                     variant="primary"
                     type="submit"
-                    // disabled={formik.isValid}
+                    disabled={!formik.isValid}
                   >
                     Lưu thêm mới
                   </Button>
