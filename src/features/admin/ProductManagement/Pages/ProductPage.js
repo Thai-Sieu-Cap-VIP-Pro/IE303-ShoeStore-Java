@@ -62,6 +62,7 @@ export default function ProductPage() {
                 products.map((product) => (
                   <tr key={product.product_id} >
                     <td className="imgTd" ><div className="imgWrap">
+                
                     <img src={product.product_img} alt="" />
                       </div></td>
                     <td className="text-center align-middle">{product.product_name}</td>
