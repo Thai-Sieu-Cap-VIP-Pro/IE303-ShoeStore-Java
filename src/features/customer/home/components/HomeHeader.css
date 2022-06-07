@@ -1,0 +1,29 @@
+.header__name{
+    text-decoration: none;
+}
+
+.dangnhap{
+    text-decoration: none;
+    background: white;
+    text-align: center;
+    border-radius: 20px;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dangky{
+    text-decoration: none;
+    background: white;
+    text-align: center;
+    border-radius: 20px;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    
+}
+
+.menu__header>a {
+    text-decoration: none;
+    color: #000;
+}

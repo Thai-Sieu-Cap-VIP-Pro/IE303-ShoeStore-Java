@@ -1,0 +1,13 @@
+.detail-buttom{
+    padding: 20px 0px; 
+    display: flex;
+}
+
+.addToCart{
+    color: black;
+    padding-right: 20px;
+}
+
+.buy{
+    color: white;
+}
