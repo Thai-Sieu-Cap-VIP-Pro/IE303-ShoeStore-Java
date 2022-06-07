@@ -2,6 +2,10 @@
     text-decoration: none;
 }
 
+.header__right{
+    display: flex;
+}
+
 .dangnhap{
     text-decoration: none;
     background: white;
@@ -20,7 +24,6 @@
     width: 100%;
     padding: 10px;
     cursor: pointer;
-    
 }
 
 .menu__header>a {

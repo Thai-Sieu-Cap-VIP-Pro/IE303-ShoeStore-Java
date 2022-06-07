@@ -116,3 +116,7 @@ button {
     display: flex;
     justify-content: space-evenly;
 }
+
+button {
+    margin-top: 30px;
+}
