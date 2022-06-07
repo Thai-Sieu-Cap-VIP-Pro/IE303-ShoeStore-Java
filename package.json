@@ -11,19 +11,28 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
-    "bootstrap": "^5.1.3",
+    "bootstrap": "^4.6.0",
     "dotenv": "^16.0.0",
+<<<<<<< HEAD
+    "faker": "^6.6.6",
+=======
     "firebase": "^9.8.1",
+>>>>>>> 8cc3110a753f1fd342de34dd7c43350ea33e9241
     "formik": "^2.2.9",
     "query-string": "^7.1.1",
     "react": "^18.0.0",
-    "react-bootstrap": "^2.2.3",
+    "react-bootstrap": "^2.3.1",
     "react-dom": "^18.0.0",
     "react-redux": "^7.2.8",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
+<<<<<<< HEAD
+    "react-toastify": "^9.0.1",
+    "sass": "^1.51.0",
+=======
     "sass": "^1.51.0",
     "reactstrap": "^9.0.2",
+>>>>>>> 8cc3110a753f1fd342de34dd7c43350ea33e9241
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
