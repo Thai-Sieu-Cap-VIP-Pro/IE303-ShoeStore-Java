@@ -35,7 +35,7 @@ const BodyProduct = () => {
                     variant="primary"
                     onClick={() => handleShowDetail(item.product_id)}
                   >
-                    View Detail
+                    Xem chi tiết sản phẩm
                   </Button>
                 </Card.Body>
               </Card>

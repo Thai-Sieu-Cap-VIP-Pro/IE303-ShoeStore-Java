@@ -64,6 +64,7 @@ button {
 
 button {
   padding: 0.5rem;
+  margin-top: 30px;
 }
 
 .instructions {
@@ -115,8 +116,4 @@ button {
 .path{
     display: flex;
     justify-content: space-evenly;
-}
-
-button {
-    margin-top: 30px;
 }
