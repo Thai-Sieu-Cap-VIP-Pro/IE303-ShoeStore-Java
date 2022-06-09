@@ -26,6 +26,7 @@ function AddNewProductForm({ isSua, productId }) {
   const products = useSelector(selectProducts);
   const pr = products.find((product) => product.product_id === productId);
   if (isSua && pr) {
+    console.log(pr)
     initialValues = {
       product_name: pr.product_name,
       product_price: pr.product_price,
