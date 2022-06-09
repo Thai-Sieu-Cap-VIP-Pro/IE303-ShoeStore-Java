@@ -6,6 +6,7 @@ import "./App.css";
 import "./App.css";
 import BrandIndex from "./features/admin/brandManagement/brandIndex";
 import ProductIndex from "./features/admin/ProductManagement/ProductIndex";
+import OrderIndex from "./features/admin/OrderManagement/OrderIndex";
 import HomeIndex from "./features/customer/home/HomeIndex";
 import Login from "./features/customer/login_register/login";
 import Register from "./features/customer/login_register/register";
@@ -19,6 +20,8 @@ function App() {
           <Route path="product/*" element={<ProductIndex />} />
 
           <Route path="brand/*" element={<BrandIndex />} />
+          <Route path="order/*" element={<OrderIndex />} />
+          {/* <Route path="report" element={<Report />} /> */}
         </Route>
         <Route path="/home/*" element={<HomeIndex />} />
         <Route path="/detail/*" element={<DetailIndex />} />
