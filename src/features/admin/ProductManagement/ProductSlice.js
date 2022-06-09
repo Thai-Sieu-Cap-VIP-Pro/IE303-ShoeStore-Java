@@ -4,7 +4,7 @@ import axios from 'axios';
 export const fetchProductsData = createAsyncThunk(
   'products/fetchProductsData',
   async () => {
-      const {data} = await axios.get(`${API_URL}/products`)
+      const {data} = await axios.get(`${API_URL}/products`, {headers: {'Access-Control-Allow-Origin': '*'}})
       return data
   }
 )
