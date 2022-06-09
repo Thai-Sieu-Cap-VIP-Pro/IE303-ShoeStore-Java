@@ -10,6 +10,8 @@ import HomeIndex from "./features/customer/home/HomeIndex";
 import Login from "./features/customer/login_register/login";
 import Register from "./features/customer/login_register/register";
 import DetailIndex from "./features/customer/detail/DetailIndex";
+import introduction from "./features/customer/intro/introduction";
+
 
 function App() {
   return (
@@ -20,8 +22,12 @@ function App() {
 
           <Route path="brand/*" element={<BrandIndex />} />
         </Route>
+
         <Route path="/home/*" element={<HomeIndex />} />
-        <Route path="/detail/*" element={<DetailIndex />} />
+        <Route path="/detail/:product_id" element={<DetailIndex />} />
+        <Route path="/gioi_thieu" element={<introduction />} />
+
+        <Route path="nu/*" element={<BrandIndex />} />
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

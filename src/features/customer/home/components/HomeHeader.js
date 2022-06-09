@@ -34,13 +34,13 @@ const HomeHeader = () => {
                     <div className="navigation__column center">
                         <ul className='nav__header__ul'>
                             <li className="menu__header" id="menu">
-                                <a href="home">TRANG CHỦ</a>
+                                <Link to={`/home`}>TRANG CHỦ</Link>
                             </li>
                             <li className="menu__header" id="menu">
-                                <a href="gioi-thieu">GIỚI THIỆU</a>
+                                <Link to={`/gioi_thieu`}>GIỚI THIỆU</Link>
                             </li>
                             <li className="menu__header" id="menu">
-                                <a href="nu">NỮ</a>
+                                <Link to={`/nu`}>NỮ</Link>
                             </li>
                             <li className="menu__header" id="menu">
                                 <a href="nam">NAM</a>
