@@ -1,13 +1,7 @@
 import React from 'react'
 
-function introduction() {
+export default function Introduction() {
     return (
-        <div>
-            introduction
-            {console.log("pass")}
-        </div>
-
+        <div>introduction</div>
     )
 }
-
-export default introduction
