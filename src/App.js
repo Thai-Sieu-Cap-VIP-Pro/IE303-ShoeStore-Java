@@ -3,6 +3,7 @@ import Admin from "./features/admin/pages/Admin";
 import "./App.css";
 import BrandIndex from "./features/admin/brandManagement/brandIndex";
 import ProductIndex from "./features/admin/ProductManagement/ProductIndex";
+import OrderIndex from "./features/admin/OrderManagement/OrderIndex";
 function App() {
   return (
     <div className="App">
@@ -10,7 +11,7 @@ function App() {
         <Route path="/admin/*" element={<Admin />}>
           <Route path="product/*" element={<ProductIndex/>} />
           <Route path="brand/*" element={<BrandIndex />} />
-          {/* <Route path="order" element={<OrderManager />} /> */}
+          <Route path="order/*" element={<OrderIndex />} />
           {/* <Route path="report" element={<Report />} /> */}
         </Route>
       </Routes>
