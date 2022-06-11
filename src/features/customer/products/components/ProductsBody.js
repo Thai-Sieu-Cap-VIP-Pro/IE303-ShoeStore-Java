@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,6 +7,9 @@ import { useDispatch } from "react-redux";
 
 import { getDetailproduct } from "../../../customer/home/HomeSlice";
 import { TwoThumbInputRange } from "react-two-thumb-input-range";
+import {
+    fetchProductsData
+  } from "../../../admin/ProductManagement/ProductSlice";
 import "./ProductsBody.css"
 
 function ProductsBody() {
@@ -18,6 +21,12 @@ function ProductsBody() {
     const [listProducts, setListProducts] = useState(products)
 
     console.log(products);
+    console.log(listProducts);
+
+    useEffect(() => {
+        setListProducts(products)
+    }, [products])
+    
     
     const handleShowDetail = (id) => {
         const product = listProducts.find((item) => item.product_id === id);
@@ -40,15 +49,15 @@ function ProductsBody() {
             <Row>
                 <Col md={3}>
                     <h4>THƯƠNG HIỆU</h4>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" /*checked*/ />
-                        <label class="form-check-label" for="flexCheckDefault">
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" /*checked*/ />
+                        <label className="form-check-label" htmlFor="flexCheckDefault">
                             Adidas
                         </label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-                        <label class="form-check-label" for="flexCheckChecked">
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+                        <label className="form-check-label" htmlFor="flexCheckChecked">
                             Nike
                         </label>
                     </div>
@@ -59,7 +68,7 @@ function ProductsBody() {
                     <div className='products'>
                         <Row>
                             <div className='sort__products'>
-                                <select class="form-select" aria-label="Default select example">
+                                <select className="form-select" aria-label="Default select example">
                                     <option selected>Mặc định</option>
                                     <option value="1">Giá: Tăng dần</option>
                                     <option value="2">Giá: Giảm dần</option>
@@ -97,19 +106,19 @@ function ProductsBody() {
                         </Row>
                         <Row>
                             <nav aria-label="...">
-                                <ul class="pagination">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" aria-label="Previous">
+                                <ul className="pagination">
+                                    <li className="page-item disabled">
+                                        <a className="page-link" href="#" aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active" aria-current="page">
-                                        <a class="page-link" href="#">2</a>
+                                    <li className="page-item"><a className="page-link" href="#">1</a></li>
+                                    <li className="page-item active" aria-current="page">
+                                        <a className="page-link" href="#">2</a>
                                     </li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
+                                    <li className="page-item"><a className="page-link" href="#">3</a></li>
+                                    <li className="page-item">
+                                        <a className="page-link" href="#" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
