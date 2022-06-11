@@ -88,7 +88,7 @@ const Login = () => {
                             value={pwd}
                             required
                         />
-                        <button>Đăng Nhập</button>
+                        <button className='btn__submit'>Đăng Nhập</button>
                     </form>
                     <p>
                         Cần một tài khoản?<br />
