@@ -1,12 +1,12 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import IntroductionPage from './pages/IntroductionPage'
+import NewsPage from './pages/NewsPage'
 
-export default function Introduction() {
+export default function News() {
     return (
         <div>
             <Routes>
-                <Route path="/*" element={<IntroductionPage />} />
+                <Route path="/*" element={<NewsPage />} />
             </Routes>
         </div>
     )

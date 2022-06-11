@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { selectProducts } from "../../../admin/ProductManagement/ProductSlice";
 import "./DetailProduct.css";
 
@@ -10,28 +10,32 @@ function DetailProduct() {
 
   const products = useSelector(selectProducts);
   
-  const {product_id} =useSearchParams();
-  let image;
-  
-  console.log(products)
-  
-  products.map((product)=> {
-    if(product.product_id == product_id)
-      image = product.product_img;
-  })
+  const {productId} = useParams();
+  const [image, setImage] = useState(null) 
 
+  useEffect(() => {
+    return () => {
+      products.forEach((product) => {
+        console.log(product.product_id)
+        if(product.product_id.toString() === productId) {
+          setImage(product.product_img)
+        }
+      })
+    }
+  }, [])
+  
+  console.log(image)
   
   return (
+    <>
+    {image && 
     <div>
       <Row>
-      
         <Col sm={6}>
           <Card>
             <Card.Img
               variant="top"
-              
               src={image}
-              // src="https://kingshoes.vn/data/upload/media/gia%CC%80y-adidas-nmd-human-race-black-gy0093-chi%CC%81nh-ha%CC%83ng-de%CC%82%CC%81n-king-shoes-1645858910.jpeg"
             />
             <Card.Body>
               <Row>
@@ -39,7 +43,7 @@ function DetailProduct() {
                   <Card>
                     <Card.Img
                       variant="top"
-                      src="https://kingshoes.vn/data/upload/media/gia%CC%80y-adidas-nmd-human-race-black-gy0093-chi%CC%81nh-ha%CC%83ng-de%CC%82%CC%81n-king-shoes-5.jpeg"
+                      src={image}
                     />
                   </Card>
                 </Col>
@@ -119,7 +123,8 @@ function DetailProduct() {
         </Col>
       </Row>
 
-    </div>
+    </div>}
+    </>
   );
 
 }

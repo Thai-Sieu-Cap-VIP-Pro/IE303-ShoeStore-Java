@@ -1,12 +1,12 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import IntroductionPage from './pages/IntroductionPage'
+import ContactPage from './pages/ContactPage'
 
-export default function Introduction() {
+export default function Contact() {
     return (
         <div>
             <Routes>
-                <Route path="/*" element={<IntroductionPage />} />
+                <Route path="/*" element={<ContactPage />} />
             </Routes>
         </div>
     )

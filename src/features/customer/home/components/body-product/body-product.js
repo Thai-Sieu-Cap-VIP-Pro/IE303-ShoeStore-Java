@@ -47,6 +47,33 @@ const BodyProduct = () => {
           }
         })}
       </Row>
+
+      <h3>-SẢN PHẨM KHUYẾN MÃI-</h3>
+      <Row>
+        {products.map((item, index) => {
+          if (item.product_status == 0) {
+            return (
+              <Col sm={3} key={index}>
+                <Card>
+                  <Card.Img variant="top" src={item.product_img} />
+                  <Card.Body>
+                    <Card.Title>{item.product_name}</Card.Title>
+                    <Card.Text>{item.product_price}</Card.Text>
+                    <Link to={`/detail/${item.product_id}`}>
+                      <Button
+                        variant="primary"
+                        onClick={() => handleShowDetail(item.product_id)}
+                      >
+                        View Detail
+                      </Button>
+                    </Link>
+                  </Card.Body>
+                </Card>
+              </Col>
+            );
+          }
+        })}
+      </Row>
     </Container>
   );
 };
