@@ -19,8 +19,8 @@ export const fetchDeleteProduct = createAsyncThunk(
     'products/fetchAddProduct',
     async (product) => {
         console.log(product)
-        await axios.post(`${API_URL}/products`, product)
-        return product
+        const {data} = await axios.post(`${API_URL}/products`, product)
+        return data
     }
   )
 export const fetchUpdateProduct = createAsyncThunk(
@@ -78,8 +78,7 @@ const productsSlice = createSlice({
       },
       [fetchAddProduct.fulfilled](state, action) {
           state.loading = HTTP_STATUS.FULFILLED
-          console.log(action.payload)
-          state.data.push(action.payload)
+          //state.data.push(action.payload)
       },
       [fetchAddProduct.rejected](state) {
           state.loading = HTTP_STATUS.REJECTED
