@@ -1,6 +1,7 @@
 import { Outlet, Route, Routes, Navigate } from "react-router-dom";
 import Admin from "./features/admin/pages/Admin";
 import "./App.css";
+import React from "react";
 // import { ToastContainer } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -11,7 +12,8 @@ import HomeIndex from "./features/customer/home/HomeIndex";
 import Login from "./features/customer/login_register/login";
 import Register from "./features/customer/login_register/register";
 import DetailIndex from "./features/customer/detail/DetailIndex";
-import Introduction from "./features/customer/intro/Introduction";
+import Dashboard from "./features/admin/dashboard";
+import Introduction from "./features/customer/intro/introduction";
 import Products from "./features/customer/products/Product";
 import Contact from "./features/customer/contact/Contact";
 import News from "./features/customer/news/News";
@@ -23,8 +25,8 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/admin/*" element={<Admin />}>
+          <Route index element={<Dashboard />} />
           <Route path="product/*" element={<ProductIndex />} />
-
           <Route path="brand/*" element={<BrandIndex />} />
           <Route path="order/*" element={<OrderIndex />} />
           {/* <Route path="report" element={<Report />} /> */}
