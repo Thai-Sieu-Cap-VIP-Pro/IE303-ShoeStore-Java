@@ -9,7 +9,7 @@ import { hideDetailOrder } from '../OrderSlice';
 
 function OrderDetail({orderId, shippingId, accountId, total }) {
   const dispatch = useDispatch()
-  const { isShow } = useSelector((state) => state.orders);
+  const { isShow, OrderId } = useSelector((state) => state.orders);
   const [user, setUser] = useState(null)
   const [shipping, setShipping] = useState(null)
   const [orderDetail, setOrderDetail] = useState([])
@@ -69,7 +69,7 @@ function OrderDetail({orderId, shippingId, accountId, total }) {
                 {
                   products.map((product, index) => (
                     <tr key={index}>
-                        <td className="text-center align-middle">{index}</td>
+                        <td className="text-center align-middle">{index+1}</td>
                         <td className="text-center align-middle">{product.product_id}</td>
                         <td className="text-center align-middle">{product.product_name}</td>
                         <td className="text-center align-middle">{product.product_price}</td>

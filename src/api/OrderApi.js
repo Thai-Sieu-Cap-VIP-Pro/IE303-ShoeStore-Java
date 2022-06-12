@@ -7,7 +7,6 @@ class OrderAPI {
     return axios.get(url);
   };
   updateOrder = (order) => {
-    console.log(order)
     const url = `${API_URL}/orders/updateStatus/${order.order_id}`;
     return axios.put(url, order)
   }

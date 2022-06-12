@@ -21,15 +21,18 @@ const ordersSlice = createSlice({
   name: "orders",
   initialState: {
       isShow: false,
+      OrderId: null,
       loading: null,
       data: []
   },
   reducers:{
         showDetailOrder: (state, action) => {
           state.isShow = true;
+          state.OrderId = action.payload;
         },
         hideDetailOrder: (state, action) => {
           state.isShow = false;
+          state.OrderId = null;
         }
   },
   extraReducers: {
@@ -49,9 +52,6 @@ const ordersSlice = createSlice({
       },
       [updateOrderData.fulfilled](state, {payload}) {
           state.loading = HTTP_STATUS.FULFILLED
-          // state.data = current(state).data.map(item => {
-
-          // })
       },
       [updateOrderData.rejected](state) {
         state.loading = HTTP_STATUS.REJECTED
