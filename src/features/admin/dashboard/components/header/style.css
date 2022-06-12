@@ -1,0 +1,18 @@
+.dashboardHeaderName {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.dashboardHeader {
+  margin: 20px 10px;
+}
+
+.breakcum {
+  font-size: 13px;
+  margin: 10px 0;
+}
+
+.breakcum span {
+  font-weight: bold;
+}

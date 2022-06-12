@@ -7,14 +7,15 @@ import HomeIndex from "./features/customer/home/HomeIndex";
 import Login from "./features/customer/login_register/login";
 import Register from "./features/customer/login_register/register";
 import DetailIndex from "./features/customer/detail/DetailIndex";
+import Dashboard from "./features/admin/dashboard";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/admin/*" element={<Admin />}>
+          <Route index element={<Dashboard />} />
           <Route path="product/*" element={<ProductIndex />} />
-
           <Route path="brand/*" element={<BrandIndex />} />
         </Route>
         <Route path="/home/*" element={<HomeIndex />} />
