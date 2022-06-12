@@ -10,7 +10,8 @@ import ReactPaginate from "react-paginate"
 
 export default function ProductPage() {
   useEffect(() => {
-    Promise.resolve(dispatch(fetchProductsData())).then(() => Navigate('product')) 
+    // Promise.resolve(dispatch(fetchProductsData())).then(() => Navigate('product')) 
+    dispatch(fetchProductsData())
   }, [])
   const products = useSelector(selectProducts)
   const itemsPerPage = 2

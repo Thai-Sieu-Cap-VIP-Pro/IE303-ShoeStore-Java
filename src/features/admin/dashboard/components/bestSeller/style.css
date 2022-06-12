@@ -1,0 +1,21 @@
+.custom-select select {
+  font-size: 12px;
+  width: 150px;
+  background-color: #1e293b;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 0;
+}
+
+.topSellerHeader {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 20px 0 10px 0;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.seller {
+  margin: 20px 0 0 10px;
+}

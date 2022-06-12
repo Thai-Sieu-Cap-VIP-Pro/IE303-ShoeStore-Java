@@ -1,11 +1,12 @@
-*{ 
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
 }
-
-
 a {
-    text-decoration: none;
+  text-decoration: none !important;
+}
+body::-webkit-scrollbar {
+  display: none;
 }
