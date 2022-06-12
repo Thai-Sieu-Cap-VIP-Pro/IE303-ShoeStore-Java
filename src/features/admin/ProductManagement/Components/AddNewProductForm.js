@@ -16,19 +16,16 @@ import {
 
 const validationSchema = Yup.object({
   product_name: Yup.string().required("Bạn cần phải nhập tên sản phẩm"),
-  product_price: Yup.string().required("Bạn cần phải nhập giá sản phẩm"),
-  product_quanity: Yup.string().required("Bạn cần phải nhập số lượng sản phẩm"),
-  product_status: Yup.string().required(
-    "Bạn cần phải nhập trạng thái sản phẩm"
-  ),
+  product_price: Yup.number().required("Bạn cần phải nhập giá sản phẩm"),
+  product_quanity: Yup.number().required("Bạn cần phải nhập số lượng sản phẩm"),
 });
 function AddNewProductForm({ isSua, productId }) {
   let initialValues = {};
   const { listBrands } = useSelector((state) => state.brand);
   const { isShow } = useSelector((state) => state.products);
   const products = useSelector(selectProducts);
-  let pr = products.find((product) => product.product_id === productId);
-  if (isSua) {
+  const pr = products.find((product) => product.product_id === productId);
+  if (isSua && pr) {
     initialValues = {
       product_name: pr.product_name,
       product_price: pr.product_price,
@@ -40,36 +37,45 @@ function AddNewProductForm({ isSua, productId }) {
     initialValues = {
       product_name: "",
       product_price: "",
-      product_brand: "",
       product_quanity: "",
-      product_status: "",
     };
   }
   const brandOptions = [];
   listBrands.forEach((brand) => {
     brandOptions.push({ key: brand.category_id, value: brand.category_name });
   });
+  const statusOptions = [
+    { key: "0", value: "Hiện" },
+    { key: "1", value: "Ẩn" }
+  ];
   const handleClose = () => {
     dispatch(hideAddProductForm());
   };
-  const [image, setImage] = React.useState(null);
   const dispatch = useDispatch();
+  const [image, setImage] = React.useState(null);
   const handleImageChange = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
     }
   };
   const onSubmit = async (values) => {
-    handleClose();
     if (image !== null) {
-      const imageRef = ref(storage, "image");
+      const imageRef = ref(storage, "image" + values.product_name);
       uploadBytes(imageRef, image)
         .then(() => {
           getDownloadURL(imageRef)
             .then(async (url) => {
               values["product_img"] = url;
-              await dispatch(fetchAddProduct(values)).unwrap();
-              dispatch(fetchProductsData());
+              // await dispatch(fetchAddProduct(values)).unwrap();
+              // dispatch(fetchProductsData());
+              if(isSua) {
+                values["product_id"] = pr.product_id;
+                await dispatch(fetchUpdateProduct(values)).unwrap();
+                dispatch(fetchProductsData());
+              } else {
+                console.log(values)
+                dispatch(fetchAddProduct(values))
+              }
             })
             .catch((error) => {
               console.log(error.message, "error getting the image url");
@@ -80,22 +86,27 @@ function AddNewProductForm({ isSua, productId }) {
           console.log(error.message);
         });
     } else {
-      values["product_img"] = pr.product_img;
-      if(isSua) {
+      if (isSua) {
         values["product_id"] = pr.product_id;
-       await dispatch(fetchUpdateProduct(values)).unwrap()
-        dispatch(fetchProductsData())
-      }
-      else {
-        dispatch(fetchAddProduct(values));
+        values["product_img"] = pr.product_img;
+        await dispatch(fetchUpdateProduct(values)).unwrap();
+        dispatch(fetchProductsData());
+      } else {
+        values["product_img"] = "https://www.hannahs.co.nz/generic/images/prod-square-back.jpg?width=800&height=800";
+        dispatch(fetchAddProduct(values))
       }
     }
+    handleClose();
   };
   return (
     <div>
       <Modal show={isShow} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Thêm sản phẩm</Modal.Title>
+          {isSua ? (
+            <Modal.Title>Sửa sản phẩm</Modal.Title>
+          ) : (
+            <Modal.Title>Thêm sản phẩm</Modal.Title>
+          )}
         </Modal.Header>
         <Modal.Body>
           <Formik
@@ -136,18 +147,28 @@ function AddNewProductForm({ isSua, productId }) {
                     name="product_quanity"
                   />
                   <FormikControl
-                    control="input"
-                    type="text"
+                    control="select"
+                    options={statusOptions}
                     label="Trạng thái"
                     name="product_status"
                   />
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    disabled={!formik.isValid}
-                  >
-                    Thêm
-                  </Button>
+                  {isSua ? (
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      disabled={!formik.isValid}
+                    >
+                      Sửa
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      disabled={!formik.isValid}
+                    >
+                      Thêm
+                    </Button>
+                  )}
                 </Form>
               );
             }}

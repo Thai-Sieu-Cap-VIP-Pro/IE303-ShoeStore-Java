@@ -54,51 +54,23 @@ const Register = () => {
         }
         console.log(user, pwd);
         setSuccess(true);
-        // try {
-        //     const response = await axios.post(REGISTER_URL,
-        //         JSON.stringify({ user, pwd }),
-        //         {
-        //             headers: { 'Content-Type': 'application/json' },
-        //             withCredentials: true
-        //         }
-        //     );
-        //     console.log(response?.data);
-        //     console.log(response?.accessToken);
-        //     console.log(JSON.stringify(response))
-        //     setSuccess(true);
-        //     //clear state and controlled inputs
-        //     //need value attrib on inputs for this
-        //     setUser('');
-        //     setPwd('');
-        //     setMatchPwd('');
-        // } catch (err) {
-        //     if (!err?.response) {
-        //         setErrMsg('No Server Response');
-        //     } else if (err.response?.status === 409) {
-        //         setErrMsg('Username Taken');
-        //     } else {
-        //         setErrMsg('Registration Failed')
-        //     }
-        //     errRef.current.focus();
-        // }
     }
 
     return (
         <div className="body">
             {success ? (
                 <section>
-                    <h1>Success!</h1>
                     <p>
-                        <a href="#">Sign In</a>
+                        <a href="/login">Đăng nhập</a>
                     </p>
                 </section>
             ) : (
                 <section>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>Register</h1>
+                    <h1>Đăng ký</h1>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="username">
-                            Username:
+                            Tên đăng nhập:
                             <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
                             <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} />
                         </label>
@@ -124,7 +96,7 @@ const Register = () => {
 
 
                         <label htmlFor="password">
-                            Password:
+                            Mật khẩu:
                             <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} />
                             <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} />
                         </label>
@@ -148,7 +120,7 @@ const Register = () => {
 
 
                         <label htmlFor="confirm_pwd">
-                            Confirm Password:
+                            Nhập lại mật khẩu:
                             <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
                             <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} />
                         </label>
@@ -168,18 +140,18 @@ const Register = () => {
                             Phải trùng với nhập mật khẩu vừa nhập.
                         </p>
 
-                        <button disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
+                        <button disabled={!validName || !validPwd || !validMatch ? true : false}>Đăng ký</button>
                     </form>
                     <p>
-                        Already registered?<br />
+                        Đã đăng ký tài khoản?<br />
                         <div className="path">
                             <span className="line">
                                 {/*put router link here*/}
-                                <a href="/login">Sign In</a>
+                                <a href="/login">Đăng nhập</a>
                             </span>
                             <span className="line">
                                 {/*put router link here*/}
-                                <a href="/home">Home</a>
+                                <a href="/home">Trang chủ</a>
                             </span>
                         </div>
                     </p>

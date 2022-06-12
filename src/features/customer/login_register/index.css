@@ -25,7 +25,7 @@ html {
 
 section {
     width: 100%;
-    max-width: 420px;
+    max-width: 500px;
     min-height: 400px;
     display: flex;
     flex-direction: column;
@@ -48,21 +48,22 @@ form {
 
 input[type="text"],
 input[type="password"],
-button,
 textarea {
   font-family: 'Nunito', sans-serif;
   font-size: 22px;
   padding: 0.25rem;
   border-radius: 0.5rem;
+  width: 100%;
 }
 
-label,
-button {
+label {
   margin-top: 1rem;
 }
 
-button {
+.btn__submit {
   padding: 0.5rem;
+  margin-top: 1rem;
+  /* margin-top: 30px; */
 }
 
 .instructions {
@@ -108,9 +109,14 @@ button {
 
 .line {
     display: inline-block;
+    text-decoration: none;
 }
 
 .path{
     display: flex;
     justify-content: space-evenly;
 }
+
+/* button {
+    margin-top: 30px;
+} */

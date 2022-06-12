@@ -4,7 +4,7 @@ import axios from 'axios';
 export const fetchProductsData = createAsyncThunk(
   'products/fetchProductsData',
   async () => {
-      const {data} = await axios.get(`${API_URL}/products`, {headers: {'Access-Control-Allow-Origin': '*'}})
+      const {data} = await axios.get(`${API_URL}/products`)
       return data
   }
 )
@@ -18,6 +18,7 @@ export const fetchDeleteProduct = createAsyncThunk(
   export const fetchAddProduct = createAsyncThunk(
     'products/fetchAddProduct',
     async (product) => {
+        console.log(product)
         await axios.post(`${API_URL}/products`, product)
         return product
     }
@@ -27,6 +28,7 @@ export const fetchUpdateProduct = createAsyncThunk(
   async (product) => {
     console.log(product)
     await axios.put(`${API_URL}/products/${product.product_id}`, product)
+    return product;
   }
 )
 const productsSlice = createSlice({
@@ -74,8 +76,10 @@ const productsSlice = createSlice({
       [fetchAddProduct.pending](state) {
         state.loading = HTTP_STATUS.PENDING
       },
-      [fetchAddProduct.fulfilled](state) {
+      [fetchAddProduct.fulfilled](state, action) {
           state.loading = HTTP_STATUS.FULFILLED
+          console.log(action.payload)
+          state.data.push(action.payload)
       },
       [fetchAddProduct.rejected](state) {
           state.loading = HTTP_STATUS.REJECTED
@@ -83,8 +87,11 @@ const productsSlice = createSlice({
       [fetchUpdateProduct.pending](state) {
         state.loading = HTTP_STATUS.PENDING
       },
-      [fetchUpdateProduct.fulfilled](state) {
+      [fetchUpdateProduct.fulfilled](state, action) {
           state.loading = HTTP_STATUS.FULFILLED
+          // state.data = current(state).data.find(item => (
+          //   item.product_id === action.payload.product_id
+          // ))
       },
       [fetchUpdateProduct.rejected](state) {
           state.loading = HTTP_STATUS.REJECTED

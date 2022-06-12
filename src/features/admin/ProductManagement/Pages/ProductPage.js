@@ -5,8 +5,9 @@ import { Card, Button, Table } from "react-bootstrap";
 import { Navigate } from "react-router-dom";
 import AddNewProductForm from '../Components/AddNewProductForm'
 import { getAllBrands } from "../../brandManagement/brandSlice";
+import "./productPage.css"
 
-function ProductPage() {
+export default function ProductPage() {
   const dispatch = useDispatch()
   useEffect(() => {
     const action = getAllBrands()
@@ -19,8 +20,15 @@ function ProductPage() {
       Promise.resolve(dispatch(fetchProductsData())).then(() => Navigate('product')) 
   }, [])
   const handleDelete = async (productId) => {
-   await dispatch(fetchDeleteProduct(productId)).unwrap()
-   dispatch(fetchProductsData())  }
+    if (window.confirm("Bạn có chắc chắn muốn xóa sản phẩm không?")) 
+      { 
+        await dispatch(fetchDeleteProduct(productId)).unwrap()
+        dispatch(fetchProductsData()) 
+      } 
+    else {
+        console.log("Không xóa");
+      }
+  }
   const handleUpdate = async (productId) => {
     setIsEdit(true)
     setPId(productId)
@@ -38,12 +46,12 @@ function ProductPage() {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>#</th>
-                <th>Tên sản phẩm</th>
-                <th>Giá</th>
-                <th>Số lượng</th>
-                <th>Trạng thái</th>
-                <th class="text-center">   
+                <th className="text-center">Hình ảnh</th>
+                <th className="text-center">Tên sản phẩm</th>
+                <th className="text-center">Giá</th>
+                <th className="text-center">Số lượng</th>
+                <th className="text-center">Trạng thái</th>
+                <th className="text-center">   
                   <Button variant="success" onClick={handleShow}> Thêm sản phẩm  </Button> 
                   <AddNewProductForm isSua={isEdit}  productId={pId}/>
                 </th>
@@ -52,13 +60,16 @@ function ProductPage() {
             <tbody>
               {
                 products.map((product) => (
-                  <tr key={product.product_id}>
-                    <td>{product.product_id}</td>
-                    <td>{product.product_name}</td>
-                    <td>{product.product_price}</td>
-                    <td>{product.product_quanity}</td>
-                    <td>{product.product_status}</td>
-                    <td class="text-center">
+                  <tr key={product.product_id} >
+                    <td className="imgTd" ><div className="imgWrap">
+                
+                    <img src={product.product_img} alt="" />
+                      </div></td>
+                    <td className="text-center align-middle">{product.product_name}</td>
+                    <td className="text-center align-middle">{product.product_price}</td>
+                    <td className="text-center align-middle">{product.product_quanity}</td>
+                    <td className="text-center align-middle">{product.product_status == 1 ? "Ẩn" : "Hiện"}</td>
+                    <td class="text-center align-middle">
                       <Button variant="primary" onClick={() => handleUpdate(product.product_id)}>Sửa</Button>
                         &emsp;
                       <Button onClick={() => handleDelete(product.product_id)} variant="danger">Xóa</Button>
@@ -73,5 +84,3 @@ function ProductPage() {
     </div>
   );
 }
-
-export default ProductPage

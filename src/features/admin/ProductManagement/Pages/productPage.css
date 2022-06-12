@@ -1,0 +1,15 @@
+.imgTd {
+   display: flex;
+   justify-content: center;
+}
+
+.imgWrap {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+
+.imgWrap img {
+    width: 100%;
+    object-fit: cover;
+}
