@@ -1,0 +1,46 @@
+.datadiv {
+  text-align: center;
+  margin: 0 10px;
+  border-radius: 5px;
+  color: white;
+}
+
+.datadiv.green {
+  background-color: #508233;
+}
+
+.datadiv.blue {
+  background-color: #181824;
+}
+
+.datadiv.orange {
+  background-color: #df6c38;
+}
+
+.datadiv.blueee {
+  background-color: #3445e5;
+}
+
+.datadiv .dataHeader {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.datadiv .dataNum {
+  font-size: 20px;
+}
+
+.datadiv .dataCompare {
+  font-size: 12px;
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+.datadiv .dataCompare svg {
+  margin-right: 5px;
+}
+
+.datadiv .dataCompare.green {
+  color: green;
+}

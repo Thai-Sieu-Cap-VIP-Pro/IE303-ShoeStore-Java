@@ -34,28 +34,22 @@ const HomeHeader = () => {
                     <div className="navigation__column center">
                         <ul className='nav__header__ul'>
                             <li className="menu__header" id="menu">
-                                <a href="home">TRANG CHỦ</a>
+                                <Link to={`/`}>TRANG CHỦ</Link>
                             </li>
                             <li className="menu__header" id="menu">
-                                <a href="gioi-thieu">GIỚI THIỆU</a>
+                                <Link to={`/introduction`}>GIỚI THIỆU</Link>
                             </li>
                             <li className="menu__header" id="menu">
-                                <a href="nu">NỮ</a>
+                                <Link to={`/products`}>SẢN PHẨM</Link>
                             </li>
                             <li className="menu__header" id="menu">
-                                <a href="nam">NAM</a>
+                                <Link to="/discount">KHUYẾN MÃI</Link>
                             </li>
                             <li className="menu__header" id="menu">
-                                <a href="tre-em">TRẺ EM</a>
+                                <Link to="/news">TIN TỨC</Link>
                             </li>
                             <li className="menu__header" id="menu">
-                                <a href="phu-kien-khac">PHỤ KIỆN KHÁC</a>
-                            </li>
-                            <li className="menu__header" id="menu">
-                                <a href="tin-tuc">TIN TỨC</a>
-                            </li>
-                            <li className="menu__header" id="menu">
-                                <a href="lien-he">LIÊN HỆ</a>
+                                <Link to="/contact">LIÊN HỆ</Link>
                             </li>
                         </ul>
                     </div>
