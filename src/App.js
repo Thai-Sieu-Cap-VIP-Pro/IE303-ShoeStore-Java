@@ -1,6 +1,7 @@
 import { Outlet, Route, Routes, Navigate } from "react-router-dom";
 import Admin from "./features/admin/pages/Admin";
 import "./App.css";
+import React from "react";
 // import { ToastContainer } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -12,7 +13,7 @@ import Login from "./features/customer/login_register/login";
 import Register from "./features/customer/login_register/register";
 import DetailIndex from "./features/customer/detail/DetailIndex";
 import Dashboard from "./features/admin/dashboard";
-import Introduction from "./features/customer/intro/Introduction";
+import Introduction from "./features/customer/intro/introduction";
 import Products from "./features/customer/products/Product";
 import Contact from "./features/customer/contact/Contact";
 import News from "./features/customer/news/News";
