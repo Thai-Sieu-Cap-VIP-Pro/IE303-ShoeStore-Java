@@ -29,6 +29,7 @@ import Contact from "./features/customer/contact/Contact";
 import News from "./features/customer/news/News";
 import Profile from "./features/customer/profile/Profile";
 import NotFound from "./features/customer/notFound/NotFound";
+import Cart from "./features/customer/cart/Cart";
 
 function App() {
   return (
@@ -50,7 +51,7 @@ function App() {
         <Route path="/news" element={<News />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/notFound" element={<NotFound />} />
-
+        <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

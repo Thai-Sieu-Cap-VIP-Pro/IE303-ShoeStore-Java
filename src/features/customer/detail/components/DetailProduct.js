@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { selectProducts } from "../../../admin/ProductManagement/ProductSlice";
+import { fetchAddCartDetail } from "../../cart/CartSlice";
 import "./DetailProduct.css";
 
 function DetailProduct() {
   const DetailProduct = useSelector((state) => state.home.DetailProduct);
-
+  const dispatch = useDispatch()
   const products = useSelector(selectProducts);
 
   const { productId } = useParams();
@@ -22,8 +23,25 @@ function DetailProduct() {
     })
   }, [products])
 
-  console.log(image)
+  const [quantity, setQuantity] = useState(1)
+  const handleRaise = () => {
+    let Quantity = quantity + 1
+    setQuantity(Quantity)
+  }
+  const handleLower = () => {
+    if(quantity > 0) {
+      let Quantity = quantity - 1
+      setQuantity(Quantity)
+    }
+  }
+  const handleChangeQuantity = (e) => {
+    setQuantity(Number(e.target.value))
+  }
 
+  const handleAddProductToCart = async() => {
+    console.log("first")
+    await dispatch(fetchAddCartDetail({cartId: "1", productId: productId, cartProductQuanity: quantity}))
+  } 
   return (
     <>
       {image &&
@@ -87,14 +105,16 @@ function DetailProduct() {
               </h3>
 
               <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button type="button" class="btn btn-outline-primary">-</button>
-                <button type="button" class="btn btn-outline-primary">01</button>
-                <button type="button" class="btn btn-outline-primary">+</button>
+                <button type="button" onClick={handleLower} class="btn btn-outline-primary">-</button>
+                <input style={{width: "40px"}} value={quantity} onChange={handleChangeQuantity}></input>
+                <button type="button" onClick={handleRaise} class="btn btn-outline-primary">+</button>
               </div>
 
               <div className="detail-buttom">
                 <div className="addToCart">
-                  <Button variant="primary" >
+                  <Button variant="primary" 
+                    onClick={handleAddProductToCart}
+                  >
                     THÊM VÀO GIỎ HÀNG
                   </Button>
                 </div>
