@@ -9,12 +9,12 @@ import {
 } from "../../../admin/ProductManagement/ProductSlice";
 
 function ProductsPage() {
-  const dispatch = useDispatch();
-  const [refresh, setRefresh] = useState(false)
-  useEffect( async () => {
-    await dispatch(fetchProductsData()).unwrap();
-    setRefresh(!refresh)
-  }, []);
+  // const dispatch = useDispatch();
+  // const [refresh, setRefresh] = useState(false)
+  // useEffect( async () => {
+  //   await dispatch(fetchProductsData()).unwrap();
+  //   setRefresh(!refresh)
+  // }, []);
   return (
     <>
       <div><HomeHeader /></div>

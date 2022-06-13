@@ -1,9 +1,9 @@
 
 import React, { useState } from 'react'
-import { Card, Table} from 'react-bootstrap'
+import { Card, Form, Table} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import OrderRow from '../Components/OrderRow'
-import { fetchOrdersData, selectOrders, showDetailOrder } from '../OrderSlice'
+import { fetchOrdersData, selectOrders, showDetailOrder, sortOrder } from '../OrderSlice'
 import ReactPaginate from "react-paginate"
 
 
@@ -33,11 +33,20 @@ function OrderPage() {
     setItemOffset(newOffset);
   };
 
-    
+  const handleSortOrder = (e) => {
+    console.log(e.target.value)
+    dispatch(sortOrder(e.target.value))
+  }
   return (
     <div>
     <Card>
       <Card.Header as="h5">Quản lí đơn hàng</Card.Header>
+      <Form.Select onChange={handleSortOrder} aria-label="Default select example">
+                <option value="1">Sắp xếp</option>
+                <option value="2">Thành tiền: tăng dần</option>
+                <option value="3">Thành tiền: giảm dần</option>
+                <option value="4">Mới nhất</option>
+      </Form.Select>
       <Card.Body>
         <Table striped bordered hover>
           <thead>

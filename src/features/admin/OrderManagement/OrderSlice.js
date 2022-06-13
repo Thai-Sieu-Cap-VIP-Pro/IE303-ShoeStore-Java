@@ -23,6 +23,7 @@ const ordersSlice = createSlice({
       isShow: false,
       OrderId: null,
       loading: null,
+      prevOrders: [],
       data: []
   },
   reducers:{
@@ -33,7 +34,24 @@ const ordersSlice = createSlice({
         hideDetailOrder: (state, action) => {
           state.isShow = false;
           state.OrderId = null;
-        }
+        },
+        sortOrder: (state, action) => {
+          switch(action.payload) {
+            case "1":
+              state.data.sort((firstOrder, secondOrder) => firstOrder.order_id - secondOrder.order_id);
+              break;
+            case "2":
+              state.data.sort((firstOrder, secondOrder) => firstOrder.total - secondOrder.total);
+              break;
+            case "3":
+              state.data.sort((firstOrder, secondOrder) => secondOrder.total - firstOrder.total);
+              break;
+            case "4":
+              state.data.sort((firstOrder, secondOrder) => secondOrder.order_id - firstOrder.order_id);
+            default:
+              // code block
+          }
+        } 
   },
   extraReducers: {
       [fetchOrdersData.pending](state) {
@@ -42,6 +60,7 @@ const ordersSlice = createSlice({
       [fetchOrdersData.fulfilled](state, {payload}) {
           state.loading = HTTP_STATUS.FULFILLED
           state.data = payload
+          state.prevOrders = payload
       },
       [fetchOrdersData.rejected](state) {
         state.loading = HTTP_STATUS.REJECTED
@@ -61,4 +80,4 @@ const ordersSlice = createSlice({
 export const selectOrders = (state) => state.orders.data;
 export default ordersSlice.reducer
 const {actions}= ordersSlice
-export const {showDetailOrder, hideDetailOrder} = actions;
+export const {showDetailOrder, hideDetailOrder, sortOrder} = actions;

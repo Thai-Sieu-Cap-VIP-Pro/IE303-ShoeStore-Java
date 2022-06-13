@@ -1,13 +1,5 @@
 import { Outlet, Route, Routes, Navigate } from "react-router-dom";
 import Admin from "./features/admin/pages/Admin";
-// import ProductManager from "./features/admin/pages/ProductManager";
-// import BrandManager from "./features/admin/pages/BrandManager";
-// import OrderManager from "./features/admin/pages/OrderManager";
-// import Report from "./features/admin/pages/Report";
-// import HomePage from "./features/customer/home/HomePage";
-// import Cart from "./features/customer/cart/Cart";
-// import Navbar from "./features/customer/navbar/Navbar";
-// import NotFound from "./features/customer/notFound/NotFound";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,8 +21,8 @@ import Contact from "./features/customer/contact/Contact";
 import News from "./features/customer/news/News";
 import Profile from "./features/customer/profile/Profile";
 import NotFound from "./features/customer/notFound/NotFound";
-import OrderPage from "./features/customer/order/pages/OrderPage";
 import Cart from "./features/customer/cart/Cart";
+import OrderPage from "./features/customer/order/pages/OrderPage";
 
 function App() {
   return (

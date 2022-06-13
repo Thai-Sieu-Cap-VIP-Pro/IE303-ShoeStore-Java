@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
@@ -6,18 +7,41 @@ import {
   decreaseCart,
   getTotals,
   removeFromCart,
-} from "./CartSlice";
+} from "./CartLSlice";
 import "./Cart.css";
 
 import { Link } from "react-router-dom";
+import {
+  fetchCartDetailData,
+  fetchDeleteCartDetail,
+  selectCartDetails,
+} from "./CartSlice";
+import productAPI from "../../../api/ProductApi";
+import CartDetailAPI from "../../../api/CartDetailApi";
 
 const Cart = () => {
-  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(getTotals());
-  }, [cart, dispatch]);
+    dispatch(fetchCartDetailData());
+  }, []);
+  const [products, setProducts] = useState([]);
+  const carts = useSelector(selectCartDetails);
+  console.log(products);
+  console.log(carts);
+  useEffect(() => {
+    (async () => {
+      const CartDetail = await CartDetailAPI.getAllCartDetails();
+      console.log(CartDetail);
+      CartDetail.data.forEach(async (cartDetail) => {
+        const product = await productAPI.getProductById(cartDetail.productId);
+        setProducts((p) => [...p, product.data]);
+      });
+    })();
+  }, []);
+
+  // useEffect(() => {
+  //   dispatch(getTotals());
+  // }, [cart, dispatch]);
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
@@ -25,8 +49,10 @@ const Cart = () => {
   const handleDecreaseCart = (product) => {
     dispatch(decreaseCart(product));
   };
-  const handleRemoveFromCart = (product) => {
-    dispatch(removeFromCart(product));
+  const handleRemoveFromCart = (id) => {
+    console.log(id);
+    dispatch(fetchDeleteCartDetail(id)).unwrap();
+    dispatch(fetchCartDetailData());
   };
   const handleClearCart = () => {
     dispatch(clearCart());
@@ -34,7 +60,7 @@ const Cart = () => {
   return (
     <div className="cart-container">
       <h2>Shopping Cart</h2>
-      {cart.cartItems.length === 0 ? (
+      {carts.length === 0 ? (
         <div className="cart-empty">
           <p>Your cart is currently empty</p>
           <div className="start-shopping">
@@ -53,32 +79,62 @@ const Cart = () => {
             <h3 className="total">Total</h3>
           </div>
           <div className="cart-items">
-            {cart.cartItems &&
-              cart.cartItems.map((cartItem) => (
-                <div className="cart-item" key={cartItem.id}>
-                  <div className="cart-product">
-                    <img src={cartItem.image} alt={cartItem.name} />
-                    <div>
-                      <h3>{cartItem.name}</h3>
-                      <p>{cartItem.desc}</p>
-                      <button onClick={() => handleRemoveFromCart(cartItem)}>
-                        Remove
-                      </button>
-                    </div>
-                  </div>
-                  <div className="cart-product-price">${cartItem.price}</div>
-                  <div className="cart-product-quantity">
-                    <button onClick={() => handleDecreaseCart(cartItem)}>
-                      -
-                    </button>
-                    <div className="count">{cartItem.cartQuantity}</div>
-                    <button onClick={() => handleAddToCart(cartItem)}>+</button>
-                  </div>
-                  <div className="cart-product-total-price">
-                    ${cartItem.price * cartItem.cartQuantity}
-                  </div>
-                </div>
-              ))}
+            {carts &&
+              carts.map((cartItem) => {
+                return (
+                  <>
+                    {products.map((product) => {
+                      if (product.product_id === cartItem.productId) {
+                        return (
+                          <div
+                            className="cart-item"
+                            key={cartItem.cartDetailId}
+                          >
+                            <div className="cart-product">
+                              <img
+                                src={product.product_img}
+                                alt={product.product_name}
+                              />
+                              <div>
+                                <h3>{product.product_name}</h3>
+                                {/* <p>{cartItem.desc}</p> */}
+                                <button
+                                  onClick={() =>
+                                    handleRemoveFromCart(cartItem.cartDetailId)
+                                  }
+                                >
+                                  Remove
+                                </button>
+                              </div>
+                            </div>
+                            <div className="cart-product-price">
+                              {product.product_price} đ
+                            </div>
+                            <div className="cart-product-quantity">
+                              <button
+                                onClick={() => handleDecreaseCart(cartItem)}
+                              >
+                                -
+                              </button>
+                              <div className="count">
+                                {cartItem.cartProductQuanity}
+                              </div>
+                              <button onClick={() => handleAddToCart(cartItem)}>
+                                +
+                              </button>
+                            </div>
+                            <div className="cart-product-total-price">
+                              $
+                              {product.product_price *
+                                cartItem.cartProductQuanity}
+                            </div>
+                          </div>
+                        );
+                      }
+                    })}
+                  </>
+                );
+              })}
           </div>
           <div className="cart-summary">
             <button className="clear-btn" onClick={() => handleClearCart()}>
@@ -87,7 +143,7 @@ const Cart = () => {
             <div className="cart-checkout">
               <div className="subtotal">
                 <span>Subtotal</span>
-                <span className="amount">${cart.cartTotalAmount}</span>
+                <span className="amount">${carts.cartTotalAmount}</span>
               </div>
               <p>Taxes and shipping calculated at checkout</p>
               <button>Check out</button>
