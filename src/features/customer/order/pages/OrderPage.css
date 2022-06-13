@@ -1,0 +1,52 @@
+.container__order {
+}
+.list__orders {
+  background-color: #ccc;
+  height: 100vh;
+}
+.process__order {
+  border-bottom: 1px solid #ababab;
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+}
+.content__process__order {
+  font-size: 16px;
+}
+.order {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 250px;
+  padding: 20px;
+  background-color: wheat;
+}
+.info__order {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
+}
+.content__order {
+  width: 80%;
+}
+.quantity__order {
+  font-size: 14px;
+  font-weight: 500;
+}
+.price__order {
+  font-size: 18px;
+}
+.img_order {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
+img {
+  vertical-align: middle;
+  border-style: none;
+  width: 100%;
+  object-fit: contain;
+}
+.size__order {
+  font-size: 12px;
+}

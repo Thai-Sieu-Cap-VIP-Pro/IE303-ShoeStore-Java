@@ -19,6 +19,7 @@ import Contact from "./features/customer/contact/Contact";
 import News from "./features/customer/news/News";
 import Profile from "./features/customer/profile/Profile";
 import NotFound from "./features/customer/notFound/NotFound";
+import OrderPage from "./features/customer/order/pages/OrderPage";
 
 function App() {
   return (
@@ -40,7 +41,7 @@ function App() {
         <Route path="/news" element={<News />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/notFound" element={<NotFound />} />
-
+        <Route path="/order/*" element={<OrderPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
