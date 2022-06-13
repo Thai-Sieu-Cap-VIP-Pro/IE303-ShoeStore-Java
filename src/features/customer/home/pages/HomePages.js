@@ -19,7 +19,7 @@ const HomePages = () => {
   }, []);
   return (
     <>
-      <div className="HomeHeader">
+      <div>
         <HomeHeader />
       </div>
       <div>
