@@ -1,53 +1,52 @@
-
-
 .imgTd {
-   display: flex;
-   justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .imgWrap {
-    width: 100px;
-    height: 100px;
-    background-color: red;
+  width: 100px;
+  height: 100px;
+  background-color: red;
 }
 
 .imgWrap img {
-    width: 100%;
-    object-fit: cover;
+  width: 100%;
+  object-fit: cover;
 }
 
 .paginationBtns {
-    list-style: none;
-    display: flex;
-    justify-content: center; 
+  list-style: none;
+  display: flex;
+  justify-content: center;
 }
 
 .paginationActive {
-    border-radius: 50%;
-    text-align: center;
-    color: white;
-    background-color: #0B5ED7;
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  background-color: #0b5ed7;
 }
 
 .prevBtn {
-    text-decoration: none;
-    font-size: large;
+  text-decoration: none;
+  font-size: large;
 }
 .paginationBtns a {
-    margin: 15px;
-    padding : 5px 5px;
-    font-size: large;
-    font-weight: 600;
+  margin: 15px;
+  padding: 5px 5px;
+  font-size: large;
+  font-weight: 600;
 }
 .nextBtn {
-    text-decoration: none;
+  text-decoration: none;
+  font-size: large;
 }
 
 .paginationDisabled {
-    color: gray;
+  color: gray;
 }
 
 .paginationDisabled:hover {
-    color: gray;
-    cursor: not-allowed;
+  color: gray;
+  cursor: not-allowed;
 }
