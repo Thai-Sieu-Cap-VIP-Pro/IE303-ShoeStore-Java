@@ -29,18 +29,11 @@
     background-color: #0B5ED7;
 }
 
-.prevBtn {
-    text-decoration: none;
-    font-size: large;
-}
 .paginationBtns a {
     margin: 15px;
     padding : 5px 5px;
     font-size: large;
     font-weight: 600;
-}
-.nextBtn {
-    text-decoration: none;
 }
 
 .paginationDisabled {
@@ -50,4 +43,10 @@
 .paginationDisabled:hover {
     color: gray;
     cursor: not-allowed;
+}
+
+.filterProduct {
+    margin: 8px 8px -10px 8px;
+    display: flex;
+    justify-content: space-between;
 }

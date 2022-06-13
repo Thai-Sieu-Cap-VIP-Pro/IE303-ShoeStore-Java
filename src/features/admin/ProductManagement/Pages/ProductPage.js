@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDeleteProduct, fetchProductsData, selectProducts, showAddProductForm } from '../ProductSlice';
-import { Card, Button, Table } from "react-bootstrap";
+import { fetchDeleteProduct, fetchProductsData, filterProductByBrand, selectProducts, showAddProductForm, sortProduct } from '../ProductSlice';
+import { Card, Button, Table, Form } from "react-bootstrap";
 import { Navigate } from "react-router-dom";
 import AddNewProductForm from '../Components/AddNewProductForm'
 import { getAllBrands } from "../../brandManagement/brandSlice";
@@ -9,23 +9,23 @@ import "./productPage.css"
 import ReactPaginate from "react-paginate"
 
 export default function ProductPage() {
+  const dispatch = useDispatch()
   useEffect(() => {
-    // Promise.resolve(dispatch(fetchProductsData())).then(() => Navigate('product')) 
     dispatch(fetchProductsData())
+    dispatch(getAllBrands())
   }, [])
   const products = useSelector(selectProducts)
+  const { listBrands } = useSelector((state) => state.brand);
   const itemsPerPage = 2
   const [currentItems, setCurrentItems] = useState(products);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   useEffect(() => {
-    console.log("544564654")
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(products.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(products.length / itemsPerPage));
   }, [products])
   useEffect(() => {
-    console.log("first")
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(products.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(products.length / itemsPerPage));
@@ -39,11 +39,6 @@ export default function ProductPage() {
     setItemOffset(newOffset);
   };
 
-  const dispatch = useDispatch()
-  useEffect(() => {
-    const action = getAllBrands()
-    dispatch(action)
-  }, [])
   const [isEdit, setIsEdit] = useState(false)
   const [pId, setPId] = useState("")
   const handleDelete = async (productId) => {
@@ -66,10 +61,38 @@ export default function ProductPage() {
     setIsEdit(false)
     dispatch(showAddProductForm());
   }
-  return (
+
+  const handleFilterByBrand = (e) => {
+    console.log(e.target.value)
+    dispatch(filterProductByBrand(e.target.value))
+  }
+  const handleSortProduct = (e) => {
+    console.log(e.target.value)
+    dispatch(sortProduct(e.target.value))
+  }
+   return (
     <div>
       <Card>
         <Card.Header as="h5">Quản lý sản phẩm</Card.Header>
+        <div className="filterProduct">
+          <Form.Select onChange={handleFilterByBrand} aria-label="Default select example">
+            <option value="-1">Tất cả thương hiệu</option>
+            {listBrands.map((brand) => {
+              return (
+                <>
+                  <option value={brand.category_id}>{brand.category_name}</option>
+                </>
+              )
+            })}
+          </Form.Select>
+          <Form.Select onChange={handleSortProduct} aria-label="Default select example">
+                <option value="1">Sắp xếp</option>
+                <option value="2">Giá tăng dần</option>
+                <option value="3">Giá giảm dần</option>
+                <option value="4">Mới nhất</option>
+          </Form.Select>
+
+        </div>
         <Card.Body>
           <Table striped bordered hover>
             <thead>
@@ -102,7 +125,6 @@ export default function ProductPage() {
                     <td class="text-center align-middle">
                       <Button variant="primary" onClick={() => handleUpdate(product.product_id)}>Sửa</Button>
                         &emsp;
-                        {console.log(product.product_id)}
                       <Button onClick={() => handleDelete(product.product_id)} variant="danger">Xóa</Button>
                     </td>
                   </tr>

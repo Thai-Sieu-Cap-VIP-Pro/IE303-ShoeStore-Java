@@ -78,7 +78,6 @@ function AddNewProductForm({ isSua, productId }) {
                 await dispatch(fetchUpdateProduct(values)).unwrap();
                 dispatch(fetchProductsData());
               } else {
-                console.log(values)
                 await dispatch(fetchAddProduct(values)).unwrap()
                 dispatch(fetchProductsData()) 
               }
