@@ -7,8 +7,16 @@ import AddNewProductForm from '../Components/AddNewProductForm'
 import { getAllBrands } from "../../brandManagement/brandSlice";
 import "./productPage.css"
 import ReactPaginate from "react-paginate"
+//import { fetchCartDetailData, selectCartDetails } from "../../../customer/cart/CartSlice";
 
 export default function ProductPage() {
+  // const cart = useSelector(selectCartDetails)
+  // console.log(cart)
+  // useEffect(() => {
+  //   dispatch(fetchCartDetailData())
+  // })
+
+
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchProductsData())
