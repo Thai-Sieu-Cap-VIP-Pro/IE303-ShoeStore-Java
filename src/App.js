@@ -23,6 +23,7 @@ import Profile from "./features/customer/profile/Profile";
 import NotFound from "./features/customer/notFound/NotFound";
 import Cart from "./features/customer/cart/Cart";
 import OrderPage from "./features/customer/order/pages/OrderPage";
+import Checkout from "./features/customer/checkout/Checkout";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path="/news" element={<News />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/notFound" element={<NotFound />} />
         <Route path="/order/*" element={<OrderPage />} />
         <Route path="/login" element={<Login />} />

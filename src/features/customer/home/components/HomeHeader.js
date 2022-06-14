@@ -31,7 +31,11 @@ const HomeHeader = () => {
                   </a>
                 </div>
               </div>
-              <div className="header__right">Giỏ hàng</div>
+              <div className="header__right">
+                <div className="cartIcon">🛒</div>
+                <span className="badge">3</span>
+                <p>Giỏ hàng</p>
+              </div>
             </div>
           </div>
           <div className="navigation__column center">
