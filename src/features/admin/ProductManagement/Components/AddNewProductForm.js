@@ -25,21 +25,6 @@ function AddNewProductForm({ isSua, productId }) {
   const { isShow } = useSelector((state) => state.products);
   const products = useSelector(selectProducts);
   const pr = products.find((product) => product.product_id === productId);
-  if (isSua && pr) {
-    initialValues = {
-      product_name: pr.product_name,
-      product_price: pr.product_price,
-      product_brand: pr.product_brand,
-      product_quanity: pr.product_quanity,
-      product_status: pr.product_status,
-    };
-  } else {
-    initialValues = {
-      product_name: "",
-      product_price: "",
-      product_quanity: "",
-    };
-  }
   const brandOptions = [];
   listBrands.forEach((brand) => {
     brandOptions.push({ key: brand.category_id, value: brand.category_name });
@@ -48,6 +33,25 @@ function AddNewProductForm({ isSua, productId }) {
     { key: "0", value: "Hiện" },
     { key: "1", value: "Ẩn" }
   ];
+  if (isSua && pr) {
+    initialValues = {
+      product_name: pr.product_name,
+      product_desc: pr.product_desc,
+      product_price: pr.product_price,
+      category_id: pr.category_id,
+      product_quanity: pr.product_quanity,
+      product_status: pr.product_status,
+    };
+  } else {
+    initialValues = {
+      product_name: "",
+      product_desc:"",
+      category_id: "0",
+      product_price: "",
+      product_quanity: "",
+      product_status: "0",
+    };
+  }
   const handleClose = () => {
     dispatch(hideAddProductForm());
   };
@@ -59,6 +63,7 @@ function AddNewProductForm({ isSua, productId }) {
     }
   };
   const onSubmit = async (values) => {
+    console.log(values)
     if (image !== null) {
       const imageRef = ref(storage, "image" + values.product_name);
       uploadBytes(imageRef, image)
@@ -73,8 +78,8 @@ function AddNewProductForm({ isSua, productId }) {
                 await dispatch(fetchUpdateProduct(values)).unwrap();
                 dispatch(fetchProductsData());
               } else {
-                console.log(values)
-                dispatch(fetchAddProduct(values))
+                await dispatch(fetchAddProduct(values)).unwrap()
+                dispatch(fetchProductsData()) 
               }
             })
             .catch((error) => {
@@ -93,7 +98,8 @@ function AddNewProductForm({ isSua, productId }) {
         dispatch(fetchProductsData());
       } else {
         values["product_img"] = "https://www.hannahs.co.nz/generic/images/prod-square-back.jpg?width=800&height=800";
-        dispatch(fetchAddProduct(values))
+        await dispatch(fetchAddProduct(values)).unwrap();
+        dispatch(fetchProductsData());
       }
     }
     handleClose();
@@ -126,6 +132,12 @@ function AddNewProductForm({ isSua, productId }) {
                   <FormikControl
                     control="input"
                     type="text"
+                    label="Mô tả"
+                    name="product_desc"
+                  />
+                  <FormikControl
+                    control="input"
+                    type="text"
                     label="Giá"
                     name="product_price"
                   />
@@ -133,7 +145,7 @@ function AddNewProductForm({ isSua, productId }) {
                     control="select"
                     options={brandOptions}
                     label="Thương hiệu"
-                    name="product_brand"
+                    name="category_id"
                   />
                   <input
                     label="Hình ảnh"

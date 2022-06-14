@@ -6,10 +6,18 @@ class OrderAPI {
     const url = `${API_URL}/orders`;
     return axios.get(url);
   };
+  getAllOrdersByAccountId = (id) => {
+    const url = `${API_URL}/orders/accountId/${id}`;
+    return axios.get(url);
+  }
   updateOrder = (order) => {
-    console.log(order)
     const url = `${API_URL}/orders/updateStatus/${order.order_id}`;
     return axios.put(url, order)
+  }
+  addOrder = (order) => {
+    const url = `${API_URL}/order`;
+    console.log(order)
+    return axios.post(url, order)
   }
 }
 

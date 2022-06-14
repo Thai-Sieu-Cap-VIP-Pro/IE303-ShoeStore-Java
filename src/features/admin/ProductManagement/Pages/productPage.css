@@ -1,3 +1,5 @@
+
+
 .imgTd {
    display: flex;
    justify-content: center;
@@ -12,4 +14,39 @@
 .imgWrap img {
     width: 100%;
     object-fit: cover;
+}
+
+.paginationBtns {
+    list-style: none;
+    display: flex;
+    justify-content: center; 
+}
+
+.paginationActive {
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    background-color: #0B5ED7;
+}
+
+.paginationBtns a {
+    margin: 15px;
+    padding : 5px 5px;
+    font-size: large;
+    font-weight: 600;
+}
+
+.paginationDisabled {
+    color: gray;
+}
+
+.paginationDisabled:hover {
+    color: gray;
+    cursor: not-allowed;
+}
+
+.filterProduct {
+    margin: 8px 8px -10px 8px;
+    display: flex;
+    justify-content: space-between;
 }

@@ -19,8 +19,8 @@ export const fetchDeleteProduct = createAsyncThunk(
     'products/fetchAddProduct',
     async (product) => {
         console.log(product)
-        await axios.post(`${API_URL}/products`, product)
-        return product
+        const {data} = await axios.post(`${API_URL}/products`, product)
+        return data
     }
   )
 export const fetchUpdateProduct = createAsyncThunk(
@@ -36,6 +36,7 @@ const productsSlice = createSlice({
   initialState: {
       isShow: false,
       loading: null,
+      prevProduct: [],
       data: []
   },
   reducers:{
@@ -44,7 +45,34 @@ const productsSlice = createSlice({
     },
     hideAddProductForm: (state, action) => {
       state.isShow = false;
-    }
+    },
+    filterProductByBrand: (state, action) => {
+      if(action.payload == -1) {
+        state.data = current(state).prevProduct;
+      }
+      else {
+        state.data = current(state).prevProduct.filter(product => product.category_id == action.payload)
+      }
+    },
+    sortProduct: (state, action) => {
+      console.log(typeof(action.payload), action.payload)
+      switch(action.payload) {
+        case "1":
+          state.data.sort((firstProduct, secondProduct) => firstProduct.product_id - secondProduct.product_id);
+          break;
+        case "2":
+          state.data.sort((firstProduct, secondProduct) => firstProduct.product_price - secondProduct.product_price);
+          break;
+        case "3":
+          state.data.sort((firstProduct, secondProduct) => secondProduct.product_price - firstProduct.product_price);
+          break;
+        case "4":
+          state.data.sort((firstProduct, secondProduct) => secondProduct.product_id - firstProduct.product_id);
+        default:
+          // code block
+      }
+    } 
+
   },
   extraReducers: {
       [fetchProductsData.pending](state) {
@@ -53,6 +81,7 @@ const productsSlice = createSlice({
       [fetchProductsData.fulfilled](state, {payload}) {
           state.loading = HTTP_STATUS.FULFILLED
           state.data = payload
+          state.prevProduct = payload
       },
       [fetchProductsData.rejected](state) {
           state.loading = HTTP_STATUS.REJECTED
@@ -78,8 +107,7 @@ const productsSlice = createSlice({
       },
       [fetchAddProduct.fulfilled](state, action) {
           state.loading = HTTP_STATUS.FULFILLED
-          console.log(action.payload)
-          state.data.push(action.payload)
+          //state.data.push(action.payload)
       },
       [fetchAddProduct.rejected](state) {
           state.loading = HTTP_STATUS.REJECTED
@@ -101,4 +129,4 @@ const productsSlice = createSlice({
 export const selectProducts = (state) => state.products.data;
 export default productsSlice.reducer
 const {actions}= productsSlice
-export const {showAddProductForm, hideAddProductForm} = actions;
+export const {showAddProductForm, hideAddProductForm, filterProductByBrand, sortProduct} = actions;

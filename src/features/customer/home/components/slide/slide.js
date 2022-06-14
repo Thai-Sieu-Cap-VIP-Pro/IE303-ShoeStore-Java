@@ -1,60 +1,45 @@
 import React, { useState } from 'react'
-import './Slider.css'
-import BtnSlider from './BtnSlider'
-import dataSlider from './dataSlider'
+import { Carousel } from 'react-bootstrap'
 
 export default function Slider() {
 
-    const [slideIndex, setSlideIndex] = useState(1)
-
-    const nextSlide = () => {
-        if (slideIndex !== dataSlider.length) {
-            setSlideIndex(slideIndex + 1)
-        }
-        else if (slideIndex === dataSlider.length) {
-            setSlideIndex(1)
-        }
-    }
-
-    const prevSlide = () => {
-        if (slideIndex !== 1) {
-            setSlideIndex(slideIndex - 1)
-        }
-        else if (slideIndex === 1) {
-            setSlideIndex(dataSlider.length)
-        }
-    }
-
-    const moveDot = index => {
-        setSlideIndex(index)
-    }
-
     return (
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="https://kingshoes.vn/data/upload/media/banner-sn3web-1571294680--acbihpps-1592386128--hipspcba-1622453987.jpg" class="d-block w-100" alt="..." />
-                </div>
-                <div class="carousel-item">
-                    <img src="..." class="d-block w-100" alt="..." />
-                </div>
-                <div class="carousel-item">
-                    <img src="..." class="d-block w-100" alt="..." />
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
+        <Carousel>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://images.pexels.com/photos/2057318/pexels-photo-2057318.jpeg"
+            alt="First slide"
+          />
+          <Carousel.Caption>
+            <h3>First slide label</h3>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://images.pexels.com/photos/9887887/pexels-photo-9887887.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="Second slide"
+          />
+      
+          <Carousel.Caption>
+            <h3>Second slide label</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="holder.js/800x400?text=Third slide&bg=20232a"
+            alt="Third slide"
+          />
+      
+          <Carousel.Caption>
+            <h3>Third slide label</h3>
+            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+      </Carousel>
     )
 }
