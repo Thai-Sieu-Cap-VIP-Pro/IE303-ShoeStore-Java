@@ -21,7 +21,7 @@ const Cart = () => {
     dispatch(fetchCartDetailData(1));
   }, []);
 
-  const [sumMoney, setSumMoney] = useState(0)
+  let sumMoney = 0
 
   const [products, setProducts] = useState([]);
   const carts = useSelector(selectCartDetails);
@@ -125,7 +125,10 @@ const Cart = () => {
                             </div>
                             <div className="cart-product-total-price">
                               ${product.product_price * cartItem.cartProductQuanity}
-                            
+                            </div>
+                            <div style={{display: "none"}}>
+                             {sumMoney +=  product.product_price * cartItem.cartProductQuanity}
+
                             </div>
                           </div>
                         );

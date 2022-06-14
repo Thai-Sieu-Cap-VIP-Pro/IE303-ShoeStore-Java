@@ -22,6 +22,12 @@ class cartDetailAPI {
     const url = `${API_URL}/cartDetail/${id}`;
     return axios.delete(url);
   };
+
+  deleteCartDetailByAccountId = (id) => {
+    const url = `${API_URL}/cartDetail/account/${id}`;
+  
+    return axios.delete(url)
+  }
 }
 
 const CartDetailAPI = new cartDetailAPI();

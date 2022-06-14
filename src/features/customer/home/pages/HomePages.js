@@ -19,15 +19,13 @@ const HomePages = () => {
   }, []);
   return (
     <>
-      <div>
+     
         <HomeHeader />
-      </div>
-      <div>
+      
         <HomeBody />
-      </div>
-      <div>
+     
         <HomeFooter />
-      </div>
+      
     </>
   );
 };

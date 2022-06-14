@@ -10,24 +10,24 @@ function OrderRow({order}) {
     const handleShow = (order_id) => {
         dispatch(showDetailOrder(order_id));
     }
-    const [status, setStatus] = useState(order.order_status)
+    const [status, setStatus] = useState(order.orderStatus)
     React.useEffect(() => {
-      setStatus(order.order_status)
-    }, [order.order_status])
+      setStatus(order.orderStatus)
+    }, [order.orderStatus])
     
     const handleChangeStatus = async(orderr) => {
         setStatus(!status)
-        const order_status = orderr.order_status === 1 ? 0 : 1;
-        const orderrr = {...orderr, order_status}
+        const orderStatus = orderr.orderStatus === 1 ? 0 : 1;
+        const orderrr = {...orderr, orderStatus}
         const action = updateOrderData(orderrr)
         await dispatch(action).unwrap(); 
         dispatch(fetchOrdersData())
     }
   return (
     <tr key={order.order_id} >
-          <td className="text-center align-middle">{order.order_id}</td>
-          <td className="text-center align-middle">{order.shipping_id}</td>
-          <td className="text-center align-middle">{order.account_id}</td>
+          <td className="text-center align-middle">{order.orderId}</td>
+          <td className="text-center align-middle">{order.shippingId}</td>
+          <td className="text-center align-middle">{order.accountId}</td>
           <td className="text-center align-middle"> 
             <Form.Check 
               type="checkbox"
@@ -38,8 +38,8 @@ function OrderRow({order}) {
           </td>
           <td className="text-center align-middle">{order.total}</td>
           <td className="text-center align-middle">   
-            <Button variant="success" onClick={() => handleShow(order.order_id)}> Chi tiết đơn hàng </Button> 
-            {isShow && (OrderId === order.order_id) && <OrderDetail  orderId={order.order_id} shippingId={order.shipping_id} accountId={order.account_id} total={order.total}/>}
+            <Button variant="success" onClick={() => handleShow(order.orderId)}> Chi tiết đơn hàng </Button> 
+            {isShow && (OrderId === order.orderId) && <OrderDetail  orderId={order.orderId} shippingId={order.shippingId} accountId={order.accountId} total={order.total}/>}
           </td> 
     </tr>
   )

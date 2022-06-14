@@ -5,6 +5,7 @@ export const fetchOrdersData = createAsyncThunk(
   'orders/fetchOrdersData',
   async () => {
       const {data} = await OrderApi.getAllOrders()
+      console.log(data)
       return data
   }
 )

@@ -14,6 +14,7 @@ import { addOrderData } from "../../../admin/OrderManagement/OrderSlice";
 import axios from "axios";
 import orderAPI from "../../../../api/OrderApi";
 import orderDetailAPI from "../../../../api/OrderDetailApi";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object({
   shippingName: Yup.string().required("Bạn cần phải nhập trường này"),
@@ -24,6 +25,7 @@ const validationSchema = Yup.object({
 });
 function checkoutPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const { listShipping } = useSelector((state) => state.checkout);
 
@@ -65,13 +67,26 @@ function checkoutPage() {
     await dispatch(action1).unwrap();
   };
   const handleCheckout = () => {
-    const newOrder = orderAPI.addOrder({account_id: "1", shipping_id: "1", order_status: "0", total: "123"}).then(function (response) {
-      // handle success
-      console.log(response);
-      carts.forEach(element => {
-        orderDetailAPI.addOrderDetail({productId: element.productId, productQuanity: element.cartProductQuanity,orderId: response.data.order_id})
-      });
-    })}
+    if(shippingId === null) {
+      alert("Ban can phai chon dia chi giao hang")
+    }
+    else {
+      const newOrder = orderAPI.addOrder({account_id: "1", shipping_id: shippingId, order_status: "0", total: sumMoney}).then(function (response) {
+        // handle success
+        console.log(response);
+        carts.forEach(element => {
+          orderDetailAPI.addOrderDetail({productId: element.productId, productQuanity: element.cartProductQuanity,orderId: response.data.order_id})
+        });
+  
+        CartDetailAPI.deleteCartDetailByAccountId("1");
+        navigate("/")
+      })}
+    }
+  let sumMoney = 0
+  const [shippingId, setShippingId] = useState(null)
+  const handleChooseShipping = (e) => {
+    setShippingId(e.target.value)
+  } 
   return (
     <div className="container__checkout">
       <div className="left">
@@ -139,6 +154,7 @@ function checkoutPage() {
                 <>
                   {" "}
                   <input
+                    onChange={handleChooseShipping}
                     type="radio"
                     id={item.shippingId}
                     name="fav_language"
@@ -186,6 +202,10 @@ function checkoutPage() {
                                 <div className="quantity">
                                   {cartItem.cartProductQuanity}
                                 </div>
+                                <div style={{display: "none"}}>
+                             {sumMoney +=  product.product_price * cartItem.cartProductQuanity}
+
+                            </div>
                               </div>
                             </div>
                           </>
@@ -195,6 +215,7 @@ function checkoutPage() {
                   </>
                 );
               })}
+            <div>Thành tiền: {sumMoney} đ</div>
           </div>
         </div>
         <Button onClick={handleCheckout}>Thanh toán</Button>

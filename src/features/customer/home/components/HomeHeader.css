@@ -1,32 +1,20 @@
-.header__name{
-    text-decoration: none;
+.headerTop {
+    height: 60px;
+    align-items: center;
+    background-color: bisque;
 }
 
-.header__right{
+.headerNavbar {
+   background-color: cornflowerblue;
+}
+
+.headerNavbar .navWrap {
     display: flex;
+    align-items: center;
+    color: white;
 }
 
-.dangnhap{
-    text-decoration: none;
-    background: white;
-    text-align: center;
-    border-radius: 20px;
-    width: 100%;
-    padding: 10px;
-    cursor: pointer;
-}
-
-.dangky{
-    text-decoration: none;
-    background: white;
-    text-align: center;
-    border-radius: 20px;
-    width: 100%;
-    padding: 10px;
-    cursor: pointer;
-}
-
-.menu__header>a {
-    text-decoration: none;
-    color: #000;
+.headerNavbar .navWrap .nav  {
+    margin: 10px 20px;
+    color: white;
 }

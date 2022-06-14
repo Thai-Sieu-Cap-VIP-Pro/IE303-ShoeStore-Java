@@ -8,6 +8,7 @@ import shippingAPI from '../../../../api/ShippingApi';
 import { hideDetailOrder } from '../OrderSlice';
 
 function OrderDetail({orderId, shippingId, accountId, total }) {
+  console.log(orderId)
   const dispatch = useDispatch()
   const { isShow, OrderId } = useSelector((state) => state.orders);
   const [user, setUser] = useState(null)
@@ -49,11 +50,11 @@ function OrderDetail({orderId, shippingId, accountId, total }) {
           {user && shipping && orderDetail && products &&
             <>
             <p>Mã hóa đơn: {orderId}</p>
-            <p>Mã khách hàng: {user.account_id}</p>
-            <p>Tên khách hàng: {user.account_name}</p>
-            <p>Số điện thoại: {shipping.shipping_phone}</p>
-            <p>Địa chỉ: {shipping.shipping_address}</p>
-            <p>Ghi chú: {shipping.shipping_note}</p>
+            <p>Mã khách hàng: {user.accountId}</p>
+            <p>Tên khách hàng: {user.accountName}</p>
+            <p>Số điện thoại: {shipping.shippingPhone}</p>
+            <p>Địa chỉ: {shipping.shippingAddress}</p>
+            <p>Ghi chú: {shipping.shippingNote}</p>
             <Table>
               <thead>
                 <tr>
