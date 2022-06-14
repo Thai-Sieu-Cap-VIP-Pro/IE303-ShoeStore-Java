@@ -6,6 +6,8 @@ import ProductsReducer from "../features/admin/ProductManagement/ProductSlice";
 import OrderReducer from "../features/admin/OrderManagement/OrderSlice";
 import HomeReducer from "../features/customer/home/HomeSlice";
 import CartDetailsReducer from "../features/customer/cart/CartSlice"
+import CheckoutReducer from "../features/customer/checkout/checkoutSlice"
+
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +18,7 @@ export const store = configureStore({
     orders: OrderReducer,
     home: HomeReducer,
     cartDetails: CartDetailsReducer,
+    checkout: CheckoutReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

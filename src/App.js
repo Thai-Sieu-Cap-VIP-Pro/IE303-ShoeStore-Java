@@ -30,6 +30,7 @@ import News from "./features/customer/news/News";
 import Profile from "./features/customer/profile/Profile";
 import NotFound from "./features/customer/notFound/NotFound";
 import Cart from "./features/customer/cart/Cart";
+import CheckoutPage from "./features/customer/checkout/pages/checkoutPage";
 
 function App() {
   return (
@@ -54,6 +55,8 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+
       </Routes>
     </div>
   );

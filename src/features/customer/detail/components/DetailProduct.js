@@ -3,14 +3,17 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { selectProducts } from "../../../admin/ProductManagement/ProductSlice";
-import { fetchAddCartDetail } from "../../cart/CartSlice";
+import { fetchAddCartDetail, fetchCartDetailData, fetchUpdateCartDetail, selectCartDetails } from "../../cart/CartSlice";
 import "./DetailProduct.css";
 
 function DetailProduct() {
   const DetailProduct = useSelector((state) => state.home.DetailProduct);
   const dispatch = useDispatch()
   const products = useSelector(selectProducts);
-
+  useEffect(() => {
+    dispatch(fetchCartDetailData(1));
+  }, []);
+  const carts = useSelector(selectCartDetails);
   const { productId } = useParams();
   const [image, setImage] = useState(null)
 
@@ -22,7 +25,6 @@ function DetailProduct() {
       }
     })
   }, [products])
-
   const [quantity, setQuantity] = useState(1)
   const handleRaise = () => {
     let Quantity = quantity + 1
@@ -39,8 +41,23 @@ function DetailProduct() {
   }
 
   const handleAddProductToCart = async() => {
-    console.log("first")
-    await dispatch(fetchAddCartDetail({cartId: "1", productId: productId, cartProductQuanity: quantity}))
+    let isExist = false;
+    carts.forEach(item=> {
+      
+ if (item.productId == productId) {
+  isExist = true;
+  let updateItem = {...item, cartProductQuanity: item.cartProductQuanity+quantity}
+  dispatch(fetchUpdateCartDetail(updateItem))
+
+ }
+
+    })
+    if(isExist == false)
+    {
+      await dispatch(fetchAddCartDetail({accountId: "1", productId: productId, cartProductQuanity: quantity})).unwrap();
+      await dispatch(fetchCartDetailData(1)).unwrap();
+    }
+
   } 
   return (
     <>
