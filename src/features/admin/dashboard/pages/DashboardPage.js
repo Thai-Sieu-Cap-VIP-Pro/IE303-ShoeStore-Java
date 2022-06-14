@@ -1,12 +1,20 @@
+import { async } from "@firebase/util";
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Container, Row } from "reactstrap";
+import { fetchOrdersData } from "../../OrderManagement/OrderSlice";
 import BestSeller from "../components/bestSeller/bestSeller";
 import Chart from "../components/chart/chart";
 import DataDiv from "../components/dataDiv/DataDiv";
 import DashboardHeader from "../components/header/dashboardHeader";
 
 const DashboardPage = () => {
-  useEffect(() => {}, []);
+  const dispatch = useDispatch();
+
+  useEffect(async () => {
+    const action = fetchOrdersData();
+    await dispatch(action).unwrap();
+  }, []);
   return (
     <>
       <Row>
