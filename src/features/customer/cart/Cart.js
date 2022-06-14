@@ -11,22 +11,23 @@ import {
 import "./Cart.css";
 
 import { Link } from "react-router-dom";
-import { fetchCartDetailData, fetchDeleteCartDetail, selectCartDetails } from "./CartSlice";
+import { DecreaseQuantity, fetchCartDetailData, fetchDeleteCartDetail, IncreaseQuantity, selectCartDetails } from "./CartSlice";
 import productAPI from "../../../api/ProductApi";
 import CartDetailAPI from "../../../api/CartDetailApi";
 
 const Cart = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchCartDetailData());
+    dispatch(fetchCartDetailData(1));
   }, []);
+
+  const [sumMoney, setSumMoney] = useState(0)
+
   const [products, setProducts] = useState([]);
   const carts = useSelector(selectCartDetails);
-  console.log(products);
-  console.log(carts);
   useEffect(() => {
     (async () => {
-      const CartDetail = await CartDetailAPI.getAllCartDetails();
+      const CartDetail = await CartDetailAPI.getCartDetailsByAccountId(1);
       console.log(CartDetail);
       CartDetail.data.forEach(async (cartDetail) => {
         const product = await productAPI.getProductById(cartDetail.productId);
@@ -39,16 +40,21 @@ const Cart = () => {
   //   dispatch(getTotals());
   // }, [cart, dispatch]);
 
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
+
+  // tăng số lượng sản phẩm trong giỏ hàng
+  const handleIncreaseCart = (cartItem) => {
+    dispatch(IncreaseQuantity(cartItem))
   };
-  const handleDecreaseCart = (product) => {
-    dispatch(decreaseCart(product));
-  };
+
+  //giảm số lượng sản trong giỏ hàng
+  const handleDecreaseCart = (cartItem) => {
+   dispatch(DecreaseQuantity(cartItem))
+
+     };
   const handleRemoveFromCart = (id) => {
     console.log(id)
     dispatch(fetchDeleteCartDetail(id)).unwrap();
-    dispatch(fetchCartDetailData());
+    dispatch(fetchCartDetailData(1));
   };
   const handleClearCart = () => {
     dispatch(clearCart());
@@ -113,12 +119,13 @@ const Cart = () => {
                               <div className="count">
                                 {cartItem.cartProductQuanity}
                               </div>
-                              <button onClick={() => handleAddToCart(cartItem)}>
+                              <button onClick={() => handleIncreaseCart(cartItem)}>
                                 +
                               </button>
                             </div>
                             <div className="cart-product-total-price">
                               ${product.product_price * cartItem.cartProductQuanity}
+                            
                             </div>
                           </div>
                         );
@@ -135,10 +142,10 @@ const Cart = () => {
             <div className="cart-checkout">
               <div className="subtotal">
                 <span>Subtotal</span>
-                <span className="amount">${carts.cartTotalAmount}</span>
+                <span className="amount">${sumMoney}</span>
               </div>
               <p>Taxes and shipping calculated at checkout</p>
-              <button>Check out</button>
+              <Link to="/checkout">Check out</Link>
               <div className="continue-shopping">
                 <Link to="/">
                   ⬅️

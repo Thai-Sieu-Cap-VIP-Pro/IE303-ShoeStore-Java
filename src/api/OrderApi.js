@@ -10,6 +10,11 @@ class OrderAPI {
     const url = `${API_URL}/orders/updateStatus/${order.order_id}`;
     return axios.put(url, order)
   }
+  addOrder = (order) => {
+    const url = `${API_URL}/order`;
+    console.log(order)
+    return axios.post(url, order)
+  }
 }
 
 const orderAPI = new OrderAPI();

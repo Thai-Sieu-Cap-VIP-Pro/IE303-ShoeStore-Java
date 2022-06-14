@@ -9,6 +9,14 @@ export const fetchOrdersData = createAsyncThunk(
   }
 )
 
+export const addOrderData = createAsyncThunk(
+  'orders/addOrderData',
+  async (order) => {
+      const {data} = await OrderApi.addOrder(order)
+      return data
+  }
+)
+
 export const updateOrderData = createAsyncThunk(
   'orders/updateOrderData',
   async (order) => {
@@ -24,7 +32,8 @@ const ordersSlice = createSlice({
       OrderId: null,
       loading: null,
       prevOrders: [],
-      data: []
+      data: [],
+      newOrder: {}
   },
   reducers:{
         showDetailOrder: (state, action) => {
@@ -63,6 +72,16 @@ const ordersSlice = createSlice({
           state.prevOrders = payload
       },
       [fetchOrdersData.rejected](state) {
+        state.loading = HTTP_STATUS.REJECTED
+      },
+      [addOrderData.pending](state) {
+        state.loading = HTTP_STATUS.PENDING
+      },
+      [addOrderData.fulfilled](state, {payload}) {
+          state.loading = HTTP_STATUS.FULFILLED
+          state.newOrder = payload;
+      },
+      [addOrderData.rejected](state) {
         state.loading = HTTP_STATUS.REJECTED
       },
 

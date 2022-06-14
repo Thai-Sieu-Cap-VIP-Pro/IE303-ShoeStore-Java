@@ -6,6 +6,11 @@ class OrderDetailAPI {
     const url = `${API_URL}/orderDetails/order/${orderId}`;
     return axios.get(url);
   };
+  addOrderDetail = (orderDetail) => {
+    const url = `${API_URL}/orderDetail`;
+    console.log(orderDetail)
+    return axios.post(url, orderDetail)
+  }
 }
 
 const orderDetailAPI = new OrderDetailAPI();

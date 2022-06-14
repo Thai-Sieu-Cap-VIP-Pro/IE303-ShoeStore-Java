@@ -4,8 +4,8 @@ import CartDetailAPI from "../../../api/CartDetailApi"
 
 export const fetchCartDetailData = createAsyncThunk(
   'cartDetails/fetchCartDetailData',
-  async () => {
-      const {data} = await CartDetailAPI.getAllCartDetails()
+  async (id) => {
+      const {data} = await CartDetailAPI.getCartDetailsByAccountId(id)
       return data
   }
 )
@@ -20,6 +20,15 @@ export const fetchAddCartDetail = createAsyncThunk(
     'cartDetails/fetchDeleteCartDetail',
     async (cardDetail) => {
         const {data} = await CartDetailAPI.addCartDetail(cardDetail)
+        return data
+    }
+)
+
+export const fetchUpdateCartDetail = createAsyncThunk(
+    'cartDetails/fetchUpdateCartDetail',
+    async (cartDetail) => {
+        console.log(cartDetail)
+        const {data} = await CartDetailAPI.updateCartDetail(cartDetail)
         return data
     }
 )
@@ -48,7 +57,40 @@ const cartDetailsSlice = createSlice({
         data: []
     },
     reducers:{
-    },
+
+        IncreaseQuantity: (state, action) => {
+            console.log(action.payload)
+            state.data = state.data.map(item=> {
+                if (item.cartDetailId === action.payload.cartDetailId )
+                {
+                    let x = item.cartProductQuanity + 1;
+             
+                    return {...item, cartProductQuanity : x,}
+                }
+
+                return item;
+            }
+                )
+
+     },
+    
+     DecreaseQuantity: (state, action) => {
+        console.log(action.payload)
+        state.data = state.data.map(item=> {
+            if (item.cartDetailId === action.payload.cartDetailId )
+            {
+                let x = item.cartProductQuanity - 1;
+         
+                return {...item, cartProductQuanity : x,}
+            }
+
+            return item;
+        }
+            )
+
+ }},
+
+     
     extraReducers: {
         [fetchCartDetailData.pending](state) {
             state.loading = HTTP_STATUS.PENDING
@@ -82,3 +124,5 @@ const cartDetailsSlice = createSlice({
   })
   export const selectCartDetails = (state) => state.cartDetails.data;
   export default cartDetailsSlice.reducer
+  const {actions}= cartDetailsSlice
+export const {IncreaseQuantity, DecreaseQuantity} = actions;

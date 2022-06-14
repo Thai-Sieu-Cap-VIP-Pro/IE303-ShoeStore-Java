@@ -6,12 +6,16 @@ class cartDetailAPI {
     const url = `${API_URL}/cartDetails`;
     return axios.get(url);
   };
+  getCartDetailsByAccountId = (id) => {
+    const url = `${API_URL}/cartDetails/accountId/${id}`;
+    return axios.get(url);
+  };
   addCartDetail = (cartDetail) => {
     const url = `${API_URL}/cartDetail`;
     return axios.post(url, cartDetail)
   }
-  updateOrder = (cartDetail) => {
-    const url = `${API_URL}/cartDetail/${cartDetail.cartDetail_id}`;
+  updateCartDetail = (cartDetail) => {
+    const url = `${API_URL}/cartDetail/${cartDetail.cartDetailId}`;
     return axios.put(url, cartDetail)
   }
   deleteCartDetail = (id) => {
