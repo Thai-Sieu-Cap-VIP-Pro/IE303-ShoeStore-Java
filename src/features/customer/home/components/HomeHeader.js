@@ -111,9 +111,9 @@ const HomeHeader = () => {
               <ShoppingCart />
             </Link>
 
-            <Link to={`/cart`}>Đăng nhập</Link>
+            <Link to={`/login`}>Đăng nhập</Link>
 
-            <Link to={`/cart`}>Đăng kí</Link>
+            <Link to={`/register`}>Đăng kí</Link>
           </div>
         </Col>
       </Row>

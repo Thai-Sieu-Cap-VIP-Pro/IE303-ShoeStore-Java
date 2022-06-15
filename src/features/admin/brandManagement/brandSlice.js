@@ -17,6 +17,15 @@ export const deleteBrand = createAsyncThunk(
   }
 );
 
+export const addBrand = createAsyncThunk(
+  "brand/addBrand",
+  async (newBrand, thunkAPI) => {
+    console.log(newBrand)
+    const response = await BrandAPI.addBrand(newBrand);
+    return response;
+  }
+);
+
 const BrandSlice = createSlice({
   name: "auth",
   initialState: {
