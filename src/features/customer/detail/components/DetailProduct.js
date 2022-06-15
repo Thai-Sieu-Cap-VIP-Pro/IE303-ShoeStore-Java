@@ -12,7 +12,7 @@ import {
   Alert,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { selectProducts } from "../../../admin/ProductManagement/ProductSlice";
 import {
   fetchAddCartDetail,
@@ -56,34 +56,35 @@ function DetailProduct() {
   const handleChangeQuantity = (e) => {
     setQuantity(Number(e.target.value));
   };
-
+const navigate = useNavigate()
   const handleAddProductToCart = async () => {
-    let isExist = false;
-    carts.forEach((item) => {
-      if (item.productId == productId) {
-        isExist = true;
-        let updateItem = {
-          ...item,
-          cartProductQuanity: item.cartProductQuanity + quantity,
-        };
-        dispatch(fetchUpdateCartDetail(updateItem));
+      if(!localStorage.getItem("user")) {
+        navigate("/login")
       }
-      return (
-        <Alert key="success" variant="success">
-          Thêm vào giỏ hàng thành công!
-        </Alert>
-      );
-    });
-    if (isExist == false) {
-      await dispatch(
-        fetchAddCartDetail({
-          accountId: "1",
-          productId: productId,
-          cartProductQuanity: quantity,
-        })
-      ).unwrap();
-      await dispatch(fetchCartDetailData(1)).unwrap();
-    }
+      else {
+        let isExist = false;
+        carts.forEach((item) => {
+          if (item.productId == productId) {
+            isExist = true;
+            let updateItem = {
+              ...item,
+              cartProductQuanity: item.cartProductQuanity + quantity,
+            };
+            dispatch(fetchUpdateCartDetail(updateItem));
+          }
+        });
+        if (isExist == false) {
+          
+          await dispatch(
+            fetchAddCartDetail({
+              accountId: "1",
+              productId: productId,
+              cartProductQuanity: quantity,
+            })
+          ).unwrap();
+          await dispatch(fetchCartDetailData(1)).unwrap();
+        }
+      }
   };
   return (
     <>
