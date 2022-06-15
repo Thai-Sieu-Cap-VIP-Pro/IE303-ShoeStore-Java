@@ -6,12 +6,13 @@ import OrderDetail from "../../../admin/OrderManagement/Components/OrderDetail";
 import { showDetailOrder } from "../../../admin/OrderManagement/OrderSlice";
 
 function HistoryOrder() {
+  let User = JSON.parse(localStorage.getItem("user"));
   const [orders, setOrders] = useState([]);
   const { isShow, OrderId } = useSelector((state) => state.orders);
-  console.log(isShow)
-  console.log(OrderId)
+  console.log(isShow);
+  console.log(OrderId);
   useEffect(() => {
-    orderAPI.getAllOrdersByAccountId(1).then((res) => {
+    orderAPI.getAllOrdersByAccountId(User.accountId).then((res) => {
       setOrders(res.data);
     });
   }, []);
@@ -38,7 +39,7 @@ function HistoryOrder() {
           <tbody>
             {orders &&
               orders.map((order) => {
-                console.log(order)
+                console.log(order);
                 return (
                   <>
                     <tr>

@@ -69,3 +69,29 @@
 .subIntro svg {
   margin-right: 15px;
 }
+
+.footer {
+  background-color: #466082;
+  color: white;
+  font-size: 16px;
+}
+
+.ht {
+  font-weight: bold;
+  margin-left: 30px;
+}
+
+.footer svg {
+  font-size: 16px;
+}
+
+.socialMedia {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.socialMedia svg {
+  font-size: 28px;
+}

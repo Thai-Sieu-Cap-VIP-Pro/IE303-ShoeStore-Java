@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import bootstrap from "bootstrap";
 import "./HomeHeader.css";
 import { Link } from "react-router-dom";
-import { Col, Container, Nav, Row } from "react-bootstrap";
+import { Col, Container, Nav, NavLink, Row } from "react-bootstrap";
 
 import {
   ShoppingCart,
@@ -18,6 +18,7 @@ import {
 import logo from "../../../../assest/images/logo.png";
 
 const HomeHeader = () => {
+  console.log(localStorage.getItem("user"));
   return (
     // <div className="homepage">
     //     <nav className="navigation">
@@ -110,10 +111,13 @@ const HomeHeader = () => {
             <Link to={`/cart`}>
               <ShoppingCart />
             </Link>
-
-            <Link to={`/login`}>Đăng nhập</Link>
-
+            {localStorage.getItem("user") ? (
+              <Link to={`/profile`}>Profile</Link>
+            ) : (
+              <>
+                <Link to={`/login`}>Đăng nhập</Link>
             <Link to={`/register`}>Đăng kí</Link>
+
           </div>
         </Col>
       </Row>
@@ -121,11 +125,21 @@ const HomeHeader = () => {
         <Col md={{ span: 10, offset: 1 }}>
           <div className="navWrap">
             <span>Danh mục sản phẩm</span>
-            <Nav>Trang chủ</Nav>
-            <Nav>Sản phẩm</Nav>
-            <Nav>Hỗ trợ khách hàng</Nav>
-            <Nav>Liên hệ</Nav>
-            <Nav>Review</Nav>
+            <Link className="nav" to="/">
+              Trang chủ
+            </Link>
+            <Link to="/products" className="nav">
+              Sản phẩm
+            </Link>
+            <Link to="/introduction" className="nav">
+              Giới thiệu
+            </Link>
+            <Link to="/contact" className="nav">
+              Liên hệ
+            </Link>
+            <Link to="/news" className="nav">
+              Tin tức
+            </Link>
           </div>
         </Col>
       </Row>

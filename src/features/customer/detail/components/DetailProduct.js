@@ -26,8 +26,11 @@ function DetailProduct() {
   const DetailProduct = useSelector((state) => state.home.DetailProduct);
   const dispatch = useDispatch();
   const products = useSelector(selectProducts);
+  let User = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
-    dispatch(fetchCartDetailData(1));
+    if (User) {
+      dispatch(fetchCartDetailData(User.accountId));
+    }
   }, []);
   const [key, setKey] = useState("home");
   const carts = useSelector(selectCartDetails);
@@ -56,35 +59,33 @@ function DetailProduct() {
   const handleChangeQuantity = (e) => {
     setQuantity(Number(e.target.value));
   };
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleAddProductToCart = async () => {
-      if(!localStorage.getItem("user")) {
-        navigate("/login")
-      }
-      else {
-        let isExist = false;
-        carts.forEach((item) => {
-          if (item.productId == productId) {
-            isExist = true;
-            let updateItem = {
-              ...item,
-              cartProductQuanity: item.cartProductQuanity + quantity,
-            };
-            dispatch(fetchUpdateCartDetail(updateItem));
-          }
-        });
-        if (isExist == false) {
-          
-          await dispatch(
-            fetchAddCartDetail({
-              accountId: "1",
-              productId: productId,
-              cartProductQuanity: quantity,
-            })
-          ).unwrap();
-          await dispatch(fetchCartDetailData(1)).unwrap();
+    if (!localStorage.getItem("user")) {
+      alert("Bạn phải đăng nhập để add sản phẩm vào giỏ hàng !");
+    } else {
+      let isExist = false;
+      carts.forEach((item) => {
+        if (item.productId == productId) {
+          isExist = true;
+          let updateItem = {
+            ...item,
+            cartProductQuanity: item.cartProductQuanity + quantity,
+          };
+          dispatch(fetchUpdateCartDetail(updateItem));
         }
+      });
+      if (isExist == false) {
+        await dispatch(
+          fetchAddCartDetail({
+            accountId: User.accountId,
+            productId: productId,
+            cartProductQuanity: quantity,
+          })
+        ).unwrap();
+        await dispatch(fetchCartDetailData(User.accountId)).unwrap();
       }
+    }
   };
   return (
     <>
