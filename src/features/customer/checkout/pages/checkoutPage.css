@@ -1,4 +1,4 @@
-.container__checkout {
+/* .container__checkout {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -42,5 +42,78 @@
   .quantity {
     font-size: 14px;
     display: inline;
-  }
-  
+  } */
+
+.orderHeader {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin: 50px 0;
+}
+
+.shipRaido {
+  display: none;
+}
+
+.addressWrap {
+  border: 1px solid gray;
+  font-size: 14px;
+  padding: 10px;
+  font-weight: initial;
+  border-radius: 10px;
+  margin: 0;
+  width: 500px;
+  cursor: pointer;
+}
+
+.addressName {
+  font-weight: bold;
+}
+
+.addressPhone svg,
+.addressLocation svg {
+  font-size: 18px;
+}
+
+.addnewAdress {
+  font-size: 14px;
+  border: 1px solid #466082;
+  padding: 10px;
+  color: white;
+  background-color: #466082;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.addressWrap.ac {
+  background-color: #d4deeb;
+}
+
+.addnewAdress svg {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+#addnewShippingBtn {
+  font-size: 14px;
+  width: 100px;
+  margin: 20px 0;
+}
+
+.concho td,
+.concho th {
+  font-size: 14px;
+}
+
+.concho td .imgItem img {
+  width: 50px;
+}
+
+.sumOrder {
+  font-size: 20px;
+  margin: 20px 0;
+}
+
+.sumOrder span {
+  font-weight: bold;
+}

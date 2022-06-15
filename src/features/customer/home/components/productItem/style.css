@@ -1,0 +1,42 @@
+.productItem {
+  width: 100%;
+  height: 300px;
+}
+
+.productItem img {
+  width: 100%;
+  height: 70%;
+}
+
+.productItem .name,
+.productItem .price {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 10px 5px;
+}
+
+.productItem .price {
+  color: brown;
+}
+
+.viewDetail {
+  font-size: 14px;
+  text-align: center;
+  background-color: #466082;
+  padding: 5px;
+  color: white;
+  display: none;
+}
+
+.viewDetail a {
+  color: white;
+  text-decoration: none;
+}
+
+.viewDetail a:hover {
+  color: white;
+  text-decoration: none;
+}
+.productItem:hover .viewDetail {
+  display: block;
+}

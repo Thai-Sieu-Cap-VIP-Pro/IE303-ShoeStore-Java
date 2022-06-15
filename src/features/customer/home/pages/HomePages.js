@@ -15,17 +15,16 @@ const HomePages = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("AD");
     dispatch(fetchProductsData());
   }, []);
   return (
     <>
-     
-        <HomeHeader />
-      
-        <HomeBody />
-     
-        <HomeFooter />
-      
+      <HomeHeader />
+
+      <HomeBody />
+
+      <HomeFooter />
     </>
   );
 };

@@ -1,20 +1,75 @@
 .headerTop {
-    height: 60px;
-    align-items: center;
-    background-color: bisque;
+  height: 40px;
+  align-items: center;
+  background-color: #0f0005;
+  color: white;
+  font-size: 12px;
+}
+
+.headerTop svg {
+  font-size: 20px;
+  background-color: #466082;
+  padding: 5px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .headerNavbar {
-   background-color: cornflowerblue;
+  background-color: #466082;
 }
 
 .headerNavbar .navWrap {
-    display: flex;
-    align-items: center;
-    color: white;
+  display: flex;
+  align-items: center;
+  color: white;
 }
 
-.headerNavbar .navWrap .nav  {
-    margin: 10px 20px;
-    color: white;
+.headerCenter {
+  height: 100px;
+  align-items: center;
+}
+
+.headerNavbar .navWrap .nav {
+  margin: 10px 20px;
+  color: white;
+}
+
+.headerCenter__searchBox {
+  display: flex;
+  align-items: center;
+  border: 1px solid #466082;
+  position: relative;
+}
+
+.headerCenter__searchBox input.a {
+  border: none;
+  font-size: 14px;
+  width: 300px;
+}
+
+.headerCenter__searchBox svg.mg {
+  color: white;
+  font-size: 14px;
+  color: white;
+  background-color: #466082;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 50px;
+}
+
+.headerCenter__logo {
+  width: 100px;
+}
+
+.headerCenter__logo img {
+  width: 100px;
+}
+
+.headerCenter_cart svg {
+  color: #6d6d6d;
+  font-size: 45px;
 }
