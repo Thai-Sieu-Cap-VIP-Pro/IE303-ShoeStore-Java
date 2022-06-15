@@ -144,30 +144,30 @@ const DashboardPage = () => {
         <DataDiv
           header="Doanh thu hôm nay"
           num={revenue}
-          compare="0.08%"
+          //compare="0.08%"
           bacground="datadiv green"
         />
         <DataDiv
           header="Số đơn hàng chưa xử lý"
           num={unOrder}
-          compare="0.18%"
+          //compare="0.18%"
           bacground="datadiv orange"
         />
         <DataDiv
           header="Số đơn đặt hôm nay"
           num={numOrder}
-          compare="12.08%"
+          //compare="12.08%"
           bacground="datadiv blue"
         />
         <DataDiv
           header="Doanh thu trong tháng"
           num={monthRevenue}
-          compare="30.08%"
+          //compare="30.08%"
           bacground="datadiv blueee"
         />
       </Row>
       <Row>
-        <BestSeller />
+        {/* <BestSeller /> */}
         <Chart dataa = {array}></Chart>
       </Row>
     </>

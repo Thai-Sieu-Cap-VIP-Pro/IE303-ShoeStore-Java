@@ -106,7 +106,7 @@ function AddNewProductForm({ isSua, productId }) {
   };
   return (
     <div>
-      <Modal show={isShow} onHide={handleClose}>
+      <Modal  size="lg" show={isShow} onHide={handleClose}>
         <Modal.Header closeButton>
           {isSua ? (
             <Modal.Title>Sửa sản phẩm</Modal.Title>

@@ -10,6 +10,11 @@ class brandAPI {
     const url = "http://localhost:8080/category/" + params;
     return axios.delete(url);
   };
+  addBrand = (newBrand) => {
+    console.log(newBrand)
+    const url = "http://localhost:8080/category";
+    return axios.post(url, newBrand);
+  }
 }
 
 const BrandAPI = new brandAPI();

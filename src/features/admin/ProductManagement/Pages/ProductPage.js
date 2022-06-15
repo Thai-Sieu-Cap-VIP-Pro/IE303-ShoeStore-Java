@@ -24,7 +24,7 @@ export default function ProductPage() {
   }, [])
   const products = useSelector(selectProducts)
   const { listBrands } = useSelector((state) => state.brand);
-  const itemsPerPage = 2
+  const itemsPerPage = 4
   const [currentItems, setCurrentItems] = useState(products);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);

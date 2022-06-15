@@ -3,17 +3,17 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, Modal, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormikControl from "../../../../../shareComponent/formikCustom/FormikControl";
-import { deleteBrand, getAllBrands } from "../../brandSlice";
+import { addBrand, deleteBrand, getAllBrands } from "../../brandSlice";
 import * as Yup from "yup";
 
 const initialValues = {
-  name: "",
-  status: "",
+  category_name: "",
+  category_status: "",
 };
 
 const validationSchema = Yup.object({
-  name: Yup.string().required("Bạn cần phải nhập trường này !"),
-  status: Yup.string().required("Bạn cần phải nhập trường này !"),
+  category_name: Yup.string().required("Bạn cần phải nhập trường này !"),
+  category_status: Yup.string().required("Bạn cần phải nhập trường này !"),
 });
 
 const BrandTable = () => {
@@ -50,6 +50,9 @@ const BrandTable = () => {
 
   const onSubmit = async (values) => {
     console.log("Vào hàm submit");
+    console.log(values)
+    await dispatch(addBrand(values)).unwrap();
+    await dispatch(getAllBrands())
   };
 
   return (
@@ -71,12 +74,12 @@ const BrandTable = () => {
                     control="input"
                     type="text"
                     label="Tên nhãn hàng"
-                    name="name"
+                    name="category_name"
                   />
                   <FormikControl
                     control="select"
                     label="Tình trạng"
-                    name="status"
+                    name="category_status"
                     options={dropdownOptions}
                   />
 
