@@ -1,13 +1,40 @@
-.detail-buttom{
-    padding: 20px 0px; 
-    display: flex;
+.detail-buttom {
+  padding: 20px 0px;
+  display: flex;
 }
 
-.addToCart{
-    color: black;
-    padding-right: 20px;
+.addToCart {
+  color: black;
+  padding-right: 20px;
 }
 
-.buy{
-    color: white;
+.buy {
+  color: white;
+}
+
+.product_title {
+  font-size: 28px;
+}
+
+.ps-product__price {
+  font-size: 24px;
+  color: #d30000;
+}
+
+button.btn.btn-outline-primary.plus,
+button.btn.btn-outline-primary.minus {
+  font-size: 20px;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  color: #d30000;
+}
+
+.abc input {
+  margin-left: 20px;
+  display: inline-block;
+}
+
+.abc {
+  border: 1px solid gray;
 }

@@ -1,0 +1,71 @@
+.sub1,
+.sub2,
+.sub3 {
+  height: 250px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.sub1 img,
+.sub2 img,
+.sub3 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+.sub1 img:hover,
+.sub2 img:hover,
+.sub3 img:hover {
+  transform: scale(1.2);
+}
+
+.listPr {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 30px 0;
+  text-align: center;
+}
+
+.subb1 {
+  height: 150px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.subb1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.subb2 img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+.navWrap span {
+  margin-right: 200px;
+  font-size: 18px;
+}
+
+.navWrap .nav {
+  font-size: 18px;
+}
+
+.subIntro {
+  border: 1px solid #466082;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.subIntro svg {
+  margin-right: 15px;
+}
