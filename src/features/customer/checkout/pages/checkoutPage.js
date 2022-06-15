@@ -35,13 +35,14 @@ function checkoutPage() {
   const navigate = useNavigate();
 
   const { listShipping } = useSelector((state) => state.checkout);
-
   useEffect(() => {
-    dispatch(fetchCartDetailData(1));
+    dispatch(fetchCartDetailData(User.accountId));
   }, []);
 
+  let User = JSON.parse(localStorage.getItem("user"));
+
   useEffect(async () => {
-    const action = fetchShippingsData(1);
+    const action = fetchShippingsData(User.accountId);
     await dispatch(action).unwrap();
   }, []);
 
@@ -51,7 +52,9 @@ function checkoutPage() {
   const carts = useSelector(selectCartDetails);
   useEffect(() => {
     (async () => {
-      const CartDetail = await CartDetailAPI.getCartDetailsByAccountId(1);
+      const CartDetail = await CartDetailAPI.getCartDetailsByAccountId(
+        User.accountId
+      );
       console.log(CartDetail);
       CartDetail.data.forEach(async (cartDetail) => {
         const product = await productAPI.getProductById(cartDetail.productId);
@@ -70,9 +73,9 @@ function checkoutPage() {
 
   const onSubmit = async (values) => {
     console.log(values);
-    const action = saveShipping({ ...values, accountId: 1 });
+    const action = saveShipping({ ...values, accountId: User.accountId });
     await dispatch(action).unwrap();
-    const action1 = fetchShippingsData(1);
+    const action1 = fetchShippingsData(User.accountId);
     await dispatch(action1).unwrap();
     setisShowAddForm(!isShowAddForm);
   };
@@ -82,23 +85,24 @@ function checkoutPage() {
     } else {
       const newOrder = orderAPI
         .addOrder({
-          account_id: "1",
-          shipping_id: shippingId,
-          order_status: "0",
+          accountId: User.accountId,
+          shippingId: shippingId,
+          orderStatus: "0",
           total: sumMoney,
+          orderDate: "2022-06-15",
         })
         .then(function (response) {
           // handle success
-          console.log(response);
+          console.log(response.data.orderId);
           carts.forEach((element) => {
             orderDetailAPI.addOrderDetail({
               productId: element.productId,
               productQuanity: element.cartProductQuanity,
-              orderId: response.data.order_id,
+              orderId: response.data.orderId,
             });
           });
 
-          CartDetailAPI.deleteCartDetailByAccountId("1");
+          CartDetailAPI.deleteCartDetailByAccountId(User.accountId);
           alert("Đặt hàng thành công!");
           navigate("/");
         });
