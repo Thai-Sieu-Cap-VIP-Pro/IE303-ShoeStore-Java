@@ -1,3 +1,17 @@
-.sort__products{
-    margin-bottom: 20px;
+.sort__products {
+  margin-bottom: 20px;
+}
+
+#th {
+  font-size: 16px;
+  margin: 20px 0;
+}
+
+#opt {
+  font-size: 14px;
+}
+
+select.form-select {
+  font-size: 14px;
+  width: 200px;
 }

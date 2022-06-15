@@ -10,7 +10,7 @@ import {
 } from "./CartLSlice";
 import "./Cart.css";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   DecreaseQuantity,
   fetchCartDetailData,
@@ -24,24 +24,39 @@ import HomeHeader from "../home/components/HomeHeader";
 import { Col } from "react-bootstrap";
 
 const Cart = () => {
+  let User = JSON.parse(localStorage.getItem("user"));
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
-    dispatch(fetchCartDetailData(1));
+    if (User) {
+      dispatch(fetchCartDetailData(User.accountId));
+    } else {
+      navigate("/");
+      alert("Bạn phải đăng nhập để xem giỏ hàng");
+    }
   }, []);
 
   let sumMoney = 0;
 
+  const formatter = new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 0,
+  });
+
   const [products, setProducts] = useState([]);
   const carts = useSelector(selectCartDetails);
   useEffect(() => {
-    (async () => {
-      const CartDetail = await CartDetailAPI.getCartDetailsByAccountId(1);
-      console.log(CartDetail);
-      CartDetail.data.forEach(async (cartDetail) => {
-        const product = await productAPI.getProductById(cartDetail.productId);
-        setProducts((p) => [...p, product.data]);
-      });
-    })();
+    if (User) {
+      (async () => {
+        const CartDetail = await CartDetailAPI.getCartDetailsByAccountId(
+          User.accountId
+        );
+        console.log(CartDetail);
+        CartDetail.data.forEach(async (cartDetail) => {
+          const product = await productAPI.getProductById(cartDetail.productId);
+          setProducts((p) => [...p, product.data]);
+        });
+      })();
+    }
   }, []);
 
   // useEffect(() => {
@@ -60,7 +75,7 @@ const Cart = () => {
   const handleRemoveFromCart = (id) => {
     console.log(id);
     dispatch(fetchDeleteCartDetail(id)).unwrap();
-    dispatch(fetchCartDetailData(1));
+    dispatch(fetchCartDetailData(User.accountId));
   };
   const handleClearCart = () => {
     dispatch(clearCart());
@@ -120,7 +135,7 @@ const Cart = () => {
                                 </div>
                               </div>
                               <div className="cart-product-price">
-                                {product.product_price} đ
+                                {formatter.format(product.product_price)} đ
                               </div>
                               <div className="cart-product-quantity">
                                 <button
@@ -139,8 +154,11 @@ const Cart = () => {
                               </div>
                               <div className="cart-product-total-price">
                                 $
-                                {product.product_price *
-                                  cartItem.cartProductQuanity}
+                                {formatter.format(
+                                  product.product_price *
+                                    cartItem.cartProductQuanity
+                                )}{" "}
+                                đ
                               </div>
                               <div style={{ display: "none" }}>
                                 {
@@ -165,7 +183,9 @@ const Cart = () => {
               <div className="cart-checkout">
                 <div className="subtotal">
                   <span>Subtotal</span>
-                  <span className="amount">${sumMoney}</span>
+                  <span className="amount">
+                    ${formatter.format(sumMoney)} đ
+                  </span>
                 </div>
                 <p>Taxes and shipping calculated at checkout</p>
                 <Link to="/checkout">Check out</Link>
