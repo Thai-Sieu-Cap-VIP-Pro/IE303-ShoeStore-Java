@@ -1,0 +1,17 @@
+.bestSeller {
+  background-color: rgb(236, 239, 246);
+  padding: 0;
+  margin: 50px 0;
+  padding-bottom: 50px;
+}
+
+.bestSeller.row {
+  justify-content: center;
+}
+
+.bestSeller .header {
+  font-weight: bold;
+  font-size: 28px;
+  text-align: center;
+  margin: 20px 0;
+}
