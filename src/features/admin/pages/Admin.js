@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./Admin.css";
 
 function Admin() {
   const navigate = useNavigate();
+  useEffect(() => {
+    if(!localStorage.getItem("user")) {
+      navigate("/login")
+
+    }
+    else {
+      if(JSON.parse(localStorage.getItem("user")).accountRole ) {
+        navigate("/login")
+      }
+    }
+    
+  }, [])
   return (
     <Container fluid>
       <Row>

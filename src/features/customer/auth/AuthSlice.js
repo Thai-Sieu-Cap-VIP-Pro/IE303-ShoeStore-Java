@@ -1,14 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
+const user = JSON.parse(localStorage.getItem("user"));
+const initialState = user 
+  ? { isLoggedIn: true }
+  : { isLoggedIn: false };
 const AuthSlice = createSlice({
-  name: "auth",
-  initialState: {
-    LoginUser: {},
-    isLogin: false,
+  name: "authcus",
+  initialState,
+  reducers: {
+    login: (state, action) => {
+      state.isLoggedIn = true
+    },
+    logout: (state, action) => {
+      state.isLoggedIn = false
+    }
   },
-  reducers: {},
 });
 
-export const { reducers: AuthReducer } = AuthSlice;
+export const {actions,reducers: AuthReducer } = AuthSlice;
+
+export const {login, logout} = actions
 
 export default AuthReducer;

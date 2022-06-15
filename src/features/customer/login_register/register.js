@@ -7,10 +7,13 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './index.css'
 import React from "react";
+import authAPI from "../../../api/AuthApi";
+import { useNavigate } from "react-router-dom";
 // import axios from '../../api/axios';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const EMAIL_REGEX = /^(?=.*[@]).{8,24}$/;
 const REGISTER_URL = "/register";
 
 const Register = () => {
@@ -21,6 +24,10 @@ const Register = () => {
   const [validName, setValidName] = useState(false);
   const [userFocus, setUserFocus] = useState(false);
 
+  const [email, setEmail] = useState("");
+  const [validEmail, setValidEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
+  
   const [pwd, setPwd] = useState("");
   const [validPwd, setValidPwd] = useState(false);
   const [pwdFocus, setPwdFocus] = useState(false);
@@ -41,14 +48,19 @@ const Register = () => {
   }, [user]);
 
   useEffect(() => {
+    setValidEmail(EMAIL_REGEX.test(email));
+  }, [email]);
+
+  useEffect(() => {
     setValidPwd(PWD_REGEX.test(pwd));
     setValidMatch(pwd === matchPwd);
   }, [pwd, matchPwd]);
 
   useEffect(() => {
     setErrMsg("");
-  }, [user, pwd, matchPwd]);
+  }, [user,email, pwd, matchPwd]);
 
+  const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
     // if button enabled with JS hack
@@ -58,8 +70,9 @@ const Register = () => {
       setErrMsg("Invalid Entry");
       return;
     }
-    console.log(user, pwd);
+    authAPI.register({accountName: user, accountEmail: email, accountPassword: pwd, accountAvatar: "https://thelifetank.com/wp-content/uploads/2018/08/avatar-default-icon.png", accountRole: "true"})
     setSuccess(true);
+    navigate("/login");
   };
 
   return (
@@ -190,8 +203,45 @@ const Register = () => {
               Phải trùng với nhập mật khẩu vừa nhập.
             </p>
 
+            <label htmlFor="username">
+              Email:
+              <FontAwesomeIcon
+                icon={faCheck}
+                className={validEmail ? "valid" : "hide"}
+              />
+              <FontAwesomeIcon
+                icon={faTimes}
+                className={validEmail || !email ? "hide" : "invalid"}
+              />
+            </label>
+            <input
+              type="text"
+              id="email"
+              ref={userRef}
+              autoComplete="off"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              required
+              aria-invalid={validEmail ? "false" : "true"}
+              aria-describedby="uidnote"
+              onFocus={() => setEmailFocus(true)}
+              onBlur={() => setEmailFocus(false)}
+            />
+            <p
+              id="uidnote"
+              className={
+                emailFocus && email && !validEmail ? "instructions" : "offscreen"
+              }
+            >
+              <FontAwesomeIcon icon={faInfoCircle} />
+              8 đến 24 ký tự.
+              <br />
+              Phải chứa ký tự @
+              
+            </p>
+
             <button
-              disabled={!validName || !validPwd || !validMatch ? true : false}
+              disabled={!validName || !validPwd || !validMatch || !validEmail ? true : false}
             >
               Đăng ký
             </button>
@@ -206,7 +256,7 @@ const Register = () => {
               </span>
               <span className="line">
                 {/*put router link here*/}
-                <a href="/home">Trang chủ</a>
+                <a href="/">Trang chủ</a>
               </span>
             </div>
           </p>

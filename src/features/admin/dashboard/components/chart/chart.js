@@ -23,24 +23,22 @@ ChartJS.register(
   Legend
 );
 
-const Chart = () => {
+const Chart = ({dataa}) => {
   const data = {
     labels: [
-      "Monday",
-      "Jul",
-      "Aug",
-      "Monday",
-      "Jul",
-      "Aug",
-      "Monday",
-      "Jul",
-      "Aug",
+      "9/6",
+      "10/6",
+      "11/6",
+      "12/6",
+      "13/6",
+      "14/6",
+      "15/6",
     ],
     datasets: [
       {
         id: 1,
         label: "Doanh thu tuần",
-        data: [5, 1, 7, 2, 6, 7, 8, 5, 4],
+        data: dataa,
       },
     ],
   };

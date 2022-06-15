@@ -6,6 +6,7 @@ import React from "react";
 import "./index.css";
 import HomePages from "../home/pages/HomePages";
 import { useNavigate } from "react-router-dom";
+import authAPI from "../../../api/AuthApi";
 const LOGIN_URL = "/auth";
 
 const Login = () => {
@@ -16,7 +17,7 @@ const Login = () => {
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState("");
 
   const navigate = useNavigate();
 
@@ -32,35 +33,21 @@ const Login = () => {
     e.preventDefault();
 
     console.log(user, pwd);
-    navigate("/home");
-    // try {
-    //     const response = await axios.post(LOGIN_URL,
-    //         JSON.stringify({ user, pwd }),
-    //         {
-    //             headers: { 'Content-Type': 'application/json' },
-    //             withCredentials: true
-    //         }
-    //     );
-    //     console.log(JSON.stringify(response?.data));
-    //     //console.log(JSON.stringify(response));
-    //     const accessToken = response?.data?.accessToken;
-    //     const roles = response?.data?.roles;
-    //     setAuth({ user, pwd, roles, accessToken });
-    //     setUser('');
-    //     setPwd('');
-    //     setSuccess(true);
-    // } catch (err) {
-    //     if (!err?.response) {
-    //         setErrMsg('No Server Response');
-    //     } else if (err.response?.status === 400) {
-    //         setErrMsg('Missing Username or Password');
-    //     } else if (err.response?.status === 401) {
-    //         setErrMsg('Unauthorized');
-    //     } else {
-    //         setErrMsg('Login Failed');
-    //     }
-    //     errRef.current.focus();
-    // }
+    authAPI.login({username: user, password: pwd}).then((res) => {
+      if(res.data === "") {
+        setSuccess("Sai tên đăng nhập hoặc mật khẩu");
+      }
+      else {
+        localStorage.setItem("user", JSON.stringify(res.data));
+        if(res.data.accountRole) {
+          navigate("/");
+        }
+        else {
+          console.log("first")
+          navigate("/admin");
+        }
+      }
+    })
   };
 
   return (
@@ -94,6 +81,7 @@ const Login = () => {
             value={pwd}
             required
           />
+          <label>{success}</label>
           <button className="btn__submit">Đăng Nhập</button>
         </form>
         <p>
@@ -106,7 +94,7 @@ const Login = () => {
             </span>
             <span className="line">
               {/*put router link here*/}
-              <a href="/home">Trang chủ</a>
+              <a href="/">Trang chủ</a>
             </span>
           </div>
         </p>

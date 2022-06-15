@@ -12,11 +12,19 @@ class AuthAPI {
     const url = "api/auth/login";
     return axiosClient.post(url, params);
   };
-
-  logout = (params) => {
-    localStorage.removeItem("authTokens");
-    const url = "api/auth/lout";
-    return axios.get(url, params);
+  login = (data) => {
+    console.log(data)
+    const url = `${API_URL}/account/login`
+    console.log(axios.post(url, data))
+    return axios.post(url, data)
+  }
+  register = (newAccount) => {
+    console.log(newAccount)
+    const url = `${API_URL}/account`
+    return axios.post(url, newAccount);
+  }
+  logout = () => {
+    localStorage.removeItem("user");
   };
 }
 
