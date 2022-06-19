@@ -110,12 +110,14 @@ function ProductsBody() {
           <div className="products">
             <Row>
               {currentItems.map((item, index) => {
-                return (
-                  <Col md={4}>
-                    {" "}
-                    <ProductItem product={item} />
-                  </Col>
-                );
+                if(item.product_status == 0) {
+                  return (
+                    <Col md={4}>
+                      {" "}
+                      <ProductItem product={item} />
+                    </Col>
+                  );
+                }
               })}
             </Row>
             <Row>

@@ -137,6 +137,7 @@ const DashboardPage = () => {
     minimumFractionDigits: 0,
   });
   let array = [num6, num5, num4, num3, num2, num1, num0];
+  let arrayDate = [date6, date5, date4, date3, date2, date1, date0]
   console.log(array);
   array.pop();
   array.push(revenue);
@@ -176,7 +177,7 @@ const DashboardPage = () => {
       </Row>
       <Row>
         {/* <BestSeller /> */}
-        <Chart dataa={array}></Chart>
+        <Chart dataa={array} datee={arrayDate}></Chart>
       </Row>
     </>
   );
