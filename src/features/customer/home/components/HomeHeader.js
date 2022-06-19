@@ -117,7 +117,7 @@ const HomeHeader = () => {
               <>
                 <Link to={`/login`}>Đăng nhập</Link>
             <Link to={`/register`}>Đăng kí</Link>
-
+              </>)}
           </div>
         </Col>
       </Row>

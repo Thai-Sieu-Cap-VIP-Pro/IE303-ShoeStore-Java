@@ -89,7 +89,6 @@ function checkoutPage() {
           shippingId: shippingId,
           orderStatus: "0",
           total: sumMoney,
-          orderDate: "2022-06-15",
         })
         .then(function (response) {
           // handle success
