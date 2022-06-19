@@ -1,6 +1,24 @@
-.profile{
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.profile {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kjkdl {
+  padding: 5px 10px;
+  background-color: #466082;
+  color: white;
+  margin: 20px;
+  border-radius: 5px;
+}
+.ll {
+  font-size: 24px;
+  text-align: center;
+}
+
+.hkldfd th,
+.hkldfd td {
+  font-size: 18px;
+  font-weight: 400;
 }

@@ -45,6 +45,10 @@ function OrderDetail({ orderId, shippingId, accountId, total }) {
     setProducts([]);
     dispatch(hideDetailOrder());
   };
+
+  const formatter = new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 0,
+  });
   return (
     <div>
       <Modal size="lg" show={isShow} onHide={handleClose}>
@@ -89,8 +93,11 @@ function OrderDetail({ orderId, shippingId, accountId, total }) {
                         {orderDetail[index].productQuanity}
                       </td>
                       <td className="text-center align-middle">
-                        {product.product_price *
-                          orderDetail[index].productQuanity}
+                        {formatter.format(
+                          product.product_price *
+                            orderDetail[index].productQuanity
+                        )}{" "}
+                        đ
                       </td>
                     </tr>
                   ))}
@@ -100,7 +107,7 @@ function OrderDetail({ orderId, shippingId, accountId, total }) {
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>Tổng tiền: {total}</td>
+                    <td>Tổng tiền: {formatter.format(total)} đ</td>
                   </tr>
                 </tbody>
               </Table>

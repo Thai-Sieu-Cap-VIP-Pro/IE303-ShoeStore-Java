@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Button, Row, Table } from "react-bootstrap";
+import { Button, Col, Row, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import orderAPI from "../../../../api/OrderApi";
 import OrderDetail from "../../../admin/OrderManagement/Components/OrderDetail";
 import { showDetailOrder } from "../../../admin/OrderManagement/OrderSlice";
+import "./ProfileBody.css";
 
 function HistoryOrder() {
   let User = JSON.parse(localStorage.getItem("user"));
@@ -20,19 +21,24 @@ function HistoryOrder() {
   const handleShow = (order_id) => {
     dispatch(showDetailOrder(order_id));
   };
+  const formatter = new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 0,
+  });
   return (
     <>
       <Row>
-        <h4>Lịch sử đơn hàng</h4>
+        <Col md={12}>
+          <h4 className="ll">Lịch sử đơn hàng</h4>
+        </Col>
       </Row>
       <Row>
-        <Table striped>
+        <Table striped className="hkldfd">
           <thead>
             <tr>
-              <th>Order No</th>
-              <th>Order Date</th>
-              <th>Order Total</th>
-              <th>Order Status</th>
+              <th>Mã đơn hàng</th>
+              <th>Ngày hóa đơn</th>
+              <th>Tổng tiền</th>
+              <th>Tình trạng hóa đơn</th>
               <th></th>
             </tr>
           </thead>
@@ -45,12 +51,13 @@ function HistoryOrder() {
                     <tr>
                       <td>{order.orderId}</td>
                       <td>{order.orderDate}</td>
-                      <td>{order.total}</td>
+                      <td>{formatter.format(order.total)} đ</td>
                       <td>
                         {order.orderStatus == 0 ? "Đang xử lý" : "Đã xử lý"}
                       </td>
                       <Button
                         variant="success"
+                        size="sm"
                         onClick={() => handleShow(order.orderId)}
                       >
                         {" "}

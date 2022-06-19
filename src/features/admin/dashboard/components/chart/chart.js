@@ -23,17 +23,9 @@ ChartJS.register(
   Legend
 );
 
-const Chart = ({dataa}) => {
+const Chart = ({ dataa }) => {
   const data = {
-    labels: [
-      "9/6",
-      "10/6",
-      "11/6",
-      "12/6",
-      "13/6",
-      "14/6",
-      "15/6",
-    ],
+    labels: ["9/6", "10/6", "11/6", "12/6", "13/6", "14/6", "15/6"],
     datasets: [
       {
         id: 1,
@@ -43,7 +35,7 @@ const Chart = ({dataa}) => {
     ],
   };
   return (
-    <Col md={8}>
+    <Col md={{ span: 10, offset: 1 }}>
       <div className="chartwrap">
         <div className="chart">
           <Line datasetIdKey="id" data={data} />
