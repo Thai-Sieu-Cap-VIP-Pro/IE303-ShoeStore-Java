@@ -1,9 +1,14 @@
 .navigate.col-md-2 {
   padding: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
 }
-
 .navigate.col-md-10 {
   padding: 0;
+  margin-left: 256px;
 }
 .admin__navigation {
   background-color: #1e293b;
