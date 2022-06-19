@@ -25,7 +25,7 @@ function Admin() {
       <Row>
         <Col md={2} className="navigate">
           <div className="admin__navigation">
-            <h2>Admin</h2>
+            <h2 onClick={() => navigate("/admin")}>Admin</h2>
             <span onClick={() => navigate("product")}>Quản lí sản phẩm</span>
             <span onClick={() => navigate("brand")}>Quản lí nhãn hàng</span>
             <span onClick={() => navigate("order")}>Quản lí đơn hàng</span>

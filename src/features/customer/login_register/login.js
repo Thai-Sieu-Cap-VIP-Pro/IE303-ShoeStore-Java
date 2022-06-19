@@ -33,21 +33,19 @@ const Login = () => {
     e.preventDefault();
 
     console.log(user, pwd);
-    authAPI.login({username: user, password: pwd}).then((res) => {
-      if(res.data === "") {
+    authAPI.login({ username: user, password: pwd }).then((res) => {
+      if (res.data === "") {
         setSuccess("Sai tên đăng nhập hoặc mật khẩu");
-      }
-      else {
+      } else {
         localStorage.setItem("user", JSON.stringify(res.data));
-        if(res.data.accountRole) {
+        if (res.data.accountRole) {
           navigate("/");
-        }
-        else {
-          console.log("first")
+        } else {
+          console.log("first");
           navigate("/admin");
         }
       }
-    })
+    });
   };
 
   return (
@@ -60,7 +58,7 @@ const Login = () => {
         >
           {errMsg}
         </p>
-        <h1>Đăng Nhập</h1>
+        <h4>Đăng Nhập</h4>
         <form onSubmit={handleSubmit}>
           <label htmlFor="username">Tên đăng nhập:</label>
           <input
@@ -82,9 +80,9 @@ const Login = () => {
             required
           />
           <label>{success}</label>
-          <button className="btn__submit">Đăng Nhập</button>
+          <button className="btn__submit heladf">Đăng Nhập</button>
         </form>
-        <p>
+        <p className="jkf">
           Cần một tài khoản?
           <br />
           <div className="path">

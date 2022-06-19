@@ -112,12 +112,19 @@ const HomeHeader = () => {
               <ShoppingCart />
             </Link>
             {localStorage.getItem("user") ? (
-              <Link to={`/profile`}>Profile</Link>
+              <Link to={`/profile`} className="btnkj">
+                Profile
+              </Link>
             ) : (
               <>
-                <Link to={`/login`}>Đăng nhập</Link>
-            <Link to={`/register`}>Đăng kí</Link>
-
+                <Link to={`/login`} className="btnkj">
+                  Đăng nhập
+                </Link>
+                <Link to={`/register`} className="btnkj">
+                  Đăng kí
+                </Link>{" "}
+              </>
+            )}
           </div>
         </Col>
       </Row>

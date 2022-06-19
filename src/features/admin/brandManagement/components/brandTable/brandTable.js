@@ -50,14 +50,14 @@ const BrandTable = () => {
 
   const onSubmit = async (values) => {
     console.log("Vào hàm submit");
-    console.log(values)
+    console.log(values);
     await dispatch(addBrand(values)).unwrap();
-    await dispatch(getAllBrands())
+    await dispatch(getAllBrands());
   };
 
   return (
     <div>
-      <Modal show={show} onHide={handleClose}>
+      <Modal size="lg" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Thêm mới nhãn hàng</Modal.Title>
         </Modal.Header>
@@ -95,14 +95,6 @@ const BrandTable = () => {
             }}
           </Formik>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Hủy
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Lưu
-          </Button>
-        </Modal.Footer>
       </Modal>
       <Card>
         <Card.Header as="h5">Quản lí nhãn hàng</Card.Header>
@@ -129,7 +121,7 @@ const BrandTable = () => {
                   <td>{brand.category_status == 1 ? "Ẩn" : "Hiện"}</td>
 
                   <td class="text-center">
-                    <Button variant="primary">Sửa</Button>
+                    {/* <Button variant="primary">Sửa</Button> */}
                     &emsp;
                     <Button
                       variant="danger"

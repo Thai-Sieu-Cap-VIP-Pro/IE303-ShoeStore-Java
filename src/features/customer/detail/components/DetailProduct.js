@@ -21,6 +21,7 @@ import {
   selectCartDetails,
 } from "../../cart/CartSlice";
 import "./DetailProduct.css";
+import intro from "../../../../assest/images/size.png";
 
 function DetailProduct() {
   const DetailProduct = useSelector((state) => state.home.DetailProduct);
@@ -85,6 +86,7 @@ function DetailProduct() {
         ).unwrap();
         await dispatch(fetchCartDetailData(User.accountId)).unwrap();
       }
+      alert("Thêm vào giỏ hàng thành công !");
     }
   };
   return (
@@ -103,39 +105,6 @@ function DetailProduct() {
               <Col sm={6}>
                 <Card>
                   <Card.Img variant="top" src={image} />
-                  <Card.Body>
-                    <Row>
-                      <Col sm={3}>
-                        <Card>
-                          <Card.Img variant="top" src={image} />
-                        </Card>
-                      </Col>
-                      <Col sm={3}>
-                        <Card>
-                          <Card.Img
-                            variant="top"
-                            src="https://kingshoes.vn/data/upload/media/gia%CC%80y-adidas-nmd-human-race-black-gy0093-chi%CC%81nh-ha%CC%83ng-de%CC%82%CC%81n-king-shoes-4.jpeg"
-                          />
-                        </Card>
-                      </Col>
-                      <Col sm={3}>
-                        <Card>
-                          <Card.Img
-                            variant="top"
-                            src="https://kingshoes.vn/data/upload/media/gia%CC%80y-adidas-nmd-human-race-black-gy0093-chi%CC%81nh-ha%CC%83ng-de%CC%82%CC%81n-king-shoes-7.jpeg"
-                          />
-                        </Card>
-                      </Col>
-                      <Col sm={3}>
-                        <Card>
-                          <Card.Img
-                            variant="top"
-                            src="https://kingshoes.vn/data/upload/media/gia%CC%80y-adidas-nmd-human-race-black-gy0093-chi%CC%81nh-ha%CC%83ng-de%CC%82%CC%81n-king-shoes-1645858910.jpeg"
-                          />
-                        </Card>
-                      </Col>
-                    </Row>
-                  </Card.Body>
                 </Card>
               </Col>
               <Col sm={6}>
@@ -188,16 +157,19 @@ function DetailProduct() {
             </Row>
             <Row>
               <Tabs
-                id="controlled-tab-example"
-                activeKey={key}
-                onSelect={(k) => setKey(k)}
+                defaultActiveKey="profile"
+                id="uncontrolled-tab-example"
                 className="mb-3"
               >
                 <Tab eventKey="home" title="Mô tả sản phẩm">
-                  <div className="dest">mô tả sản phẩm</div>
+                  <div className="" style={{ width: 1000, margin: 20 }}>
+                    {DetailProduct.product_desc}
+                  </div>
                 </Tab>
                 <Tab eventKey="profile" title="Hướng dẫn tính size">
-                  <div className="dest">Hướng dẫn tính size</div>
+                  <div>
+                    <img width={1000} src={intro} alt="" />
+                  </div>
                 </Tab>
               </Tabs>
             </Row>

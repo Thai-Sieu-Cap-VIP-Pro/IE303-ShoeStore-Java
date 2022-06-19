@@ -5,7 +5,7 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import './index.css'
+import "./index.css";
 import React from "react";
 import authAPI from "../../../api/AuthApi";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +27,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(false);
   const [emailFocus, setEmailFocus] = useState(false);
-  
+
   const [pwd, setPwd] = useState("");
   const [validPwd, setValidPwd] = useState(false);
   const [pwdFocus, setPwdFocus] = useState(false);
@@ -58,9 +58,9 @@ const Register = () => {
 
   useEffect(() => {
     setErrMsg("");
-  }, [user,email, pwd, matchPwd]);
+  }, [user, email, pwd, matchPwd]);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     // if button enabled with JS hack
@@ -70,7 +70,14 @@ const Register = () => {
       setErrMsg("Invalid Entry");
       return;
     }
-    authAPI.register({accountName: user, accountEmail: email, accountPassword: pwd, accountAvatar: "https://thelifetank.com/wp-content/uploads/2018/08/avatar-default-icon.png", accountRole: "true"})
+    authAPI.register({
+      accountName: user,
+      accountEmail: email,
+      accountPassword: pwd,
+      accountAvatar:
+        "https://thelifetank.com/wp-content/uploads/2018/08/avatar-default-icon.png",
+      accountRole: "true",
+    });
     setSuccess(true);
     navigate("/login");
   };
@@ -92,7 +99,7 @@ const Register = () => {
           >
             {errMsg}
           </p>
-          <h1>Đăng ký</h1>
+          <h4>Đăng ký</h4>
           <form onSubmit={handleSubmit}>
             <label htmlFor="username">
               Tên đăng nhập:
@@ -230,23 +237,29 @@ const Register = () => {
             <p
               id="uidnote"
               className={
-                emailFocus && email && !validEmail ? "instructions" : "offscreen"
+                emailFocus && email && !validEmail
+                  ? "instructions"
+                  : "offscreen"
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
               8 đến 24 ký tự.
               <br />
               Phải chứa ký tự @
-              
             </p>
 
             <button
-              disabled={!validName || !validPwd || !validMatch || !validEmail ? true : false}
+              disabled={
+                !validName || !validPwd || !validMatch || !validEmail
+                  ? true
+                  : false
+              }
+              className="lkdffkd"
             >
               Đăng ký
             </button>
           </form>
-          <p>
+          <p className="jkf">
             Đã đăng ký tài khoản?
             <br />
             <div className="path">

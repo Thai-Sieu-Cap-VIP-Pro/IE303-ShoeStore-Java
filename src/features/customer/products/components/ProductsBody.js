@@ -26,7 +26,7 @@ function ProductsBody() {
   const products = useSelector(selectProducts);
   const { listBrands } = useSelector((state) => state.brand);
   console.log(listBrands);
-  const itemsPerPage = 20;
+  const itemsPerPage = 9;
   const [currentItems, setCurrentItems] = useState(products);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -110,15 +110,12 @@ function ProductsBody() {
           <div className="products">
             <Row>
               {currentItems.map((item, index) => {
-                if (item.product_status == 1) {
-                  console.log("first");
-                  return (
-                    <Col md={4}>
-                      {" "}
-                      <ProductItem product={item} />
-                    </Col>
-                  );
-                }
+                return (
+                  <Col md={4}>
+                    {" "}
+                    <ProductItem product={item} />
+                  </Col>
+                );
               })}
             </Row>
             <Row>

@@ -23,21 +23,24 @@ const DashboardPage = () => {
   date.setDate(date.getDate() - 7);
 
   //tao 7 ngay gan nhat
-  var date0 = new Date(), date1 = new Date(), date2 = new Date(),date3 = new Date(),date4 = new Date(),date5 = new Date(),date6 = new Date()
-   date0 = new Date();
-   date1.setDate(date0.getDate() - 1);
+  var date0 = new Date(),
+    date1 = new Date(),
+    date2 = new Date(),
+    date3 = new Date(),
+    date4 = new Date(),
+    date5 = new Date(),
+    date6 = new Date();
+  date0 = new Date();
+  date1.setDate(date0.getDate() - 1);
   date2.setDate(date0.getDate() - 2);
- date3.setDate(date0.getDate() - 3);
- date4.setDate(date0.getDate() - 4);
- date5.setDate(date0.getDate() - 5);
- date6.setDate(date0.getDate() - 6);
+  date3.setDate(date0.getDate() - 3);
+  date4.setDate(date0.getDate() - 4);
+  date5.setDate(date0.getDate() - 5);
+  date6.setDate(date0.getDate() - 6);
 
-
-
-
-  var lastWeek = date.getDate()+'-'+ (date.getMonth()+1) +'-'+date.getFullYear();
-  console.log(lastWeek)
-
+  var lastWeek =
+    date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+  console.log(lastWeek);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -83,57 +86,62 @@ const DashboardPage = () => {
     });
   }
 
+  var num0 = 0,
+    num1 = 0,
+    num2 = 0,
+    num3 = 0,
+    num4 = 0,
+    num5 = 0,
+    num6 = 0;
 
-
-  var num0 = 0, num1 = 0, num2 = 0, num3 = 0, num4 = 0, num5 = 0, num6 = 0
-
-
-
-  orders.forEach(item=> {
-    if(orderId.includes(item.orderId))
-    {
-      console.log(item.orderDate.split("-")[1])
-      switch ( item.orderDate.split("-")[2] ) {
+  orders.forEach((item) => {
+    if (orderId.includes(item.orderId)) {
+      console.log(item.orderDate.split("-")[1]);
+      switch (item.orderDate.split("-")[2]) {
         case date0.getDay().toString():
-          num0 += item.total
-          
+          num0 += item.total;
+
           break;
-          case date1.getDate().toString():
-            num1 += item.total
-          
-            break;
-            case date2.getDate().toString():
-              num2 += item.total
-          
-              break;
-              case date3.getDate().toString():
-                num3 += item.total
-          
-                break;
-                case date4.getDate().toString():
-                  num4 += item.total
-          
-                  break;
-                  case date5.getDate().toString():
-                    num5 += item.total
-          
-                    break;
-                    case date6.getDate().toString():
-                      num6 += item.total
-          
-                      break;
-                                                
+        case date1.getDate().toString():
+          num1 += item.total;
+
+          break;
+        case date2.getDate().toString():
+          num2 += item.total;
+
+          break;
+        case date3.getDate().toString():
+          num3 += item.total;
+
+          break;
+        case date4.getDate().toString():
+          num4 += item.total;
+
+          break;
+        case date5.getDate().toString():
+          num5 += item.total;
+
+          break;
+        case date6.getDate().toString():
+          num6 += item.total;
+
+          break;
+
         default:
           break;
       }
-     
     }
-  })
+  });
 
-  let array = [num6,num5, num4, num3, num2, num1, num0]
-  console.log(array)
+  const formatter = new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 0,
+  });
+  let array = [num6, num5, num4, num3, num2, num1, num0];
+  console.log(array);
+  array.pop();
+  array.push(revenue);
 
-  console.log(orderId)
+  console.log(orderId);
 
   return (
     <>
@@ -143,7 +151,7 @@ const DashboardPage = () => {
       <Row>
         <DataDiv
           header="Doanh thu hôm nay"
-          num={revenue}
+          num={formatter.format(revenue)}
           //compare="0.08%"
           bacground="datadiv green"
         />
@@ -161,14 +169,14 @@ const DashboardPage = () => {
         />
         <DataDiv
           header="Doanh thu trong tháng"
-          num={monthRevenue}
+          num={formatter.format(monthRevenue)}
           //compare="30.08%"
           bacground="datadiv blueee"
         />
       </Row>
       <Row>
         {/* <BestSeller /> */}
-        <Chart dataa = {array}></Chart>
+        <Chart dataa={array}></Chart>
       </Row>
     </>
   );

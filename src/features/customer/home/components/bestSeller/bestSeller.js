@@ -17,7 +17,7 @@ const BestSeller = () => {
       <Row>
         <Col md={1}></Col>
         {products.map((item, index) => {
-          if (index < 5) {
+          if (index > 5 && index < 11) {
             return (
               <Col md={2}>
                 <ProductItem product={item} />
