@@ -23,9 +23,16 @@ ChartJS.register(
   Legend
 );
 
-const Chart = ({ dataa }) => {
+const Chart = ({ dataa, datee }) => {
+  console.log(datee)
+  let days = []
+  datee.map(day => {
+    console.log(day.getDate())
+    days.push(`${day.getDate()}/${day.getMonth()}`)
+  })
+  console.log(days)
   const data = {
-    labels: ["9/6", "10/6", "11/6", "12/6", "13/6", "14/6", "15/6"],
+    labels: days,
     datasets: [
       {
         id: 1,

@@ -15,6 +15,7 @@ import {
   DecreaseQuantity,
   fetchCartDetailData,
   fetchDeleteCartDetail,
+  fetchUpdateCartDetail,
   IncreaseQuantity,
   selectCartDetails,
 } from "./CartSlice";
@@ -66,11 +67,15 @@ const Cart = () => {
   // tăng số lượng sản phẩm trong giỏ hàng
   const handleIncreaseCart = (cartItem) => {
     dispatch(IncreaseQuantity(cartItem));
+    let x = cartItem.cartProductQuanity + 1;
+    dispatch(fetchUpdateCartDetail({...cartItem, cartProductQuanity : x,}))
   };
 
   //giảm số lượng sản trong giỏ hàng
   const handleDecreaseCart = (cartItem) => {
     dispatch(DecreaseQuantity(cartItem));
+    let x = cartItem.cartProductQuanity - 1;
+    dispatch(fetchUpdateCartDetail({...cartItem, cartProductQuanity : x,}))
   };
   const handleRemoveFromCart = (id) => {
     console.log(id);

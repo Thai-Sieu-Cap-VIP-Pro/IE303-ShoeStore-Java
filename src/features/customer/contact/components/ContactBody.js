@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Row, Col, Card } from "react-bootstrap";
 import "./ContactBody.css"
 
+
 function ContactBody() {
     return (
         <div className='contact'>
@@ -15,7 +16,7 @@ function ContactBody() {
             </Row>
 
             <div className='contact_content'>
-                <h4>THÔNG TIN LIÊN HỆ</h4>
+                {/* <h4>THÔNG TIN LIÊN HỆ</h4> */}
             </div>
         </div>
     )

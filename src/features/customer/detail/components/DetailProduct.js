@@ -89,6 +89,9 @@ function DetailProduct() {
       alert("Thêm vào giỏ hàng thành công !");
     }
   };
+  const formatter = new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 0,
+  });
   return (
     <>
       <Container>
@@ -112,7 +115,7 @@ function DetailProduct() {
                   {DetailProduct.product_name}
                 </h1>
                 <h3 class="ps-product__price">
-                  {DetailProduct.product_price} đ
+                  {formatter.format(DetailProduct.product_price)} đ
                 </h3>
 
                 <div
